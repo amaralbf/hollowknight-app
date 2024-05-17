@@ -29,6 +29,12 @@ export const initCanvas = async () => {
 
   const map = await createMap();
 
+  const background = new Graphics();
+  background.fill("#000");
+  background.rect(0, 0, map.width, map.height); // Draw the rectangle
+  background.fill();
+  rootContainer.addChild(background);
+
   const mapContainer = new Container();
   rootContainer.addChild(mapContainer);
 
