@@ -15,8 +15,6 @@ let minZoomLevel: number;
 
 const zoomStep = 0.1;
 
-// let mapMousePoint: Point;
-
 export const initCanvas = async () => {
   await app.init({ width: 1800, height: 880, background: "#222" });
 
@@ -31,7 +29,7 @@ export const initCanvas = async () => {
 
   const background = new Graphics();
   background.fill("#000");
-  background.rect(0, 0, map.width, map.height); // Draw the rectangle
+  background.rect(0, 0, map.width, map.height);
   background.fill();
   rootContainer.addChild(background);
 
@@ -43,13 +41,9 @@ export const initCanvas = async () => {
   console.log("map.width", map.width);
   console.log("map.height", map.height);
   console.log("app.renderer.width", app.renderer.width);
-  // console.log(app.renderer.width / map.width);
-  // console.log((app.renderer.width / map.width).toFixed(1));
 
   const minXZoomLevel = app.renderer.width / map.width;
   const minYZoomLevel = app.renderer.height / map.height;
-  // console.log("minXZoomLevel", minXZoomLevel);
-  // console.log("minYZoomLevel", minYZoomLevel);
 
   minZoomLevel = Number(Math.min(minXZoomLevel, minYZoomLevel).toFixed(1));
   console.log("minZoomLevel", minZoomLevel);
@@ -69,17 +63,8 @@ export const initCanvas = async () => {
   addMouseClickListener(rootContainer);
   addZoomListener(rootContainer, mapContainer);
 
-  // rootContainer.on("pointerdown", (event: FederatedPointerEvent) => {
-  //   console.log("x:", event.x, ", y:", event.y);
-  //   // mouseposition = mouseposition || { x: 0, y: 0 };
-  //   // mouseposition.x = event.global.x;
-  //   // mouseposition.y = event.global.y;
-  // });
-
   const charm = await drawCharm("fury_of_the_fallen");
   mapContainer.addChild(charm);
-
-  // map.x = -300;
 };
 
 const createMap = async () => {
@@ -100,32 +85,7 @@ const drawCharm = async (id: string) => {
   return element;
 };
 
-// const createZote = async () => {
-//   const texture = await Assets.load("zote.png");
-//   const zote = new Sprite(texture);
-
-//   zote.x = app.renderer.width / 2;
-//   zote.y = app.renderer.height / 2;
-
-//   // Rotate around the center
-//   zote.anchor.x = 0.5;
-//   zote.anchor.y = 0.5;
-
-//   // Listen for frame updates
-//   app.ticker.add(() => {
-//     // zote.x = 4000;
-//     zote.rotation += 0.03;
-//   });
-
-//   return zote;
-// };
-
 const addMouseClickListener = (container: Container) => {
-  // container.on("pointermove", (event: FederatedPointerEvent) => {
-  //   // mapMousePoint = event.getLocalPosition(container);
-  //   // console.log(mapMousePoint);
-  // });
-
   container.on("pointerdown", (event: FederatedPointerEvent) => {
     console.log("global click:", { x: event.x, y: event.y });
     console.log("local click:", event.getLocalPosition(container));
@@ -135,19 +95,11 @@ const addMouseClickListener = (container: Container) => {
 const addZoomListener = (container: Container, mapContainer: Container) => {
   container.on("wheel", (event: FederatedWheelEvent) => {
     const delta = Math.sign(event.deltaY);
-    // console.log("mouse wheel delta", delta);
     const localPoint = event.getLocalPosition(container);
-    // console.log(
-    //   `zooming centered on local point (${localPoint.x}, ${localPoint.y})`,
-    // );
 
-    const globalX = event.x - container.x;
-    const globalY = event.y - container.y;
-    // console.log(`zooming centered on global point (${globalX}, ${globalY})`);
     if (delta > 0) {
       zoom(container, mapContainer, localPoint, -zoomStep);
     } else {
-      // zoomIn(container, map, { x: globalX, y: globalY });
       zoom(container, mapContainer, localPoint, zoomStep);
     }
   });
