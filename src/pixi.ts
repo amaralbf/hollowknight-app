@@ -29,7 +29,10 @@ export const initCanvas = async () => {
 
   const map = await createMap();
 
-  rootContainer.addChild(map);
+  const mapContainer = new Container();
+  rootContainer.addChild(mapContainer);
+
+  mapContainer.addChild(map);
 
   console.log("map.width", map.width);
   console.log("map.height", map.height);
@@ -58,7 +61,7 @@ export const initCanvas = async () => {
   rootContainer.y = (app.renderer.height - rootContainer.height) / 2;
 
   addMouseClickListener(rootContainer);
-  addZoomListener(rootContainer, map);
+  addZoomListener(rootContainer, mapContainer);
 
   // rootContainer.on("pointerdown", (event: FederatedPointerEvent) => {
   //   console.log("x:", event.x, ", y:", event.y);
@@ -68,7 +71,7 @@ export const initCanvas = async () => {
   // });
 
   const charm = await drawCharm("fury_of_the_fallen");
-  rootContainer.addChild(charm);
+  mapContainer.addChild(charm);
 
   // map.x = -300;
 };
@@ -123,7 +126,7 @@ const addMouseClickListener = (container: Container) => {
   });
 };
 
-const addZoomListener = (container: Container, map: Sprite) => {
+const addZoomListener = (container: Container, mapContainer: Container) => {
   container.on("wheel", (event: FederatedWheelEvent) => {
     const delta = Math.sign(event.deltaY);
     // console.log("mouse wheel delta", delta);
@@ -136,17 +139,17 @@ const addZoomListener = (container: Container, map: Sprite) => {
     const globalY = event.y - container.y;
     // console.log(`zooming centered on global point (${globalX}, ${globalY})`);
     if (delta > 0) {
-      zoom(container, map, localPoint, -zoomStep);
+      zoom(container, mapContainer, localPoint, -zoomStep);
     } else {
       // zoomIn(container, map, { x: globalX, y: globalY });
-      zoom(container, map, localPoint, zoomStep);
+      zoom(container, mapContainer, localPoint, zoomStep);
     }
   });
 };
 
 function zoom(
   container: Container,
-  map: Sprite,
+  mapContainer: Container,
   point: Point,
   zoomStep: number,
 ) {
@@ -161,8 +164,8 @@ function zoom(
   const factor = (zoomLevel - prevZoomLevel) / zoomLevel;
   const offsetX = factor * point.x;
   const offsetY = factor * point.y;
-  map.x -= offsetX;
-  map.y -= offsetY;
+  mapContainer.x -= offsetX;
+  mapContainer.y -= offsetY;
   container.scale.set(zoomLevel);
 
   console.log("zoom", {
