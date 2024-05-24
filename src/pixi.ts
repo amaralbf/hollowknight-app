@@ -14,6 +14,7 @@ let zoomLevel: number;
 let minZoomLevel: number;
 
 const zoomStep = 0.1;
+let dragTarget: Container | null = null;
 
 export const initCanvas = async () => {
   await app.init({ width: 1800, height: 880, background: "#222" });
@@ -34,6 +35,7 @@ export const initCanvas = async () => {
   rootContainer.addChild(background);
 
   const mapContainer = new Container();
+  mapContainer.eventMode = "static";
   rootContainer.addChild(mapContainer);
 
   mapContainer.addChild(map);
@@ -60,7 +62,8 @@ export const initCanvas = async () => {
   rootContainer.x = (app.renderer.width - rootContainer.width) / 2;
   rootContainer.y = (app.renderer.height - rootContainer.height) / 2;
 
-  addMouseClickListener(rootContainer);
+  // addMouseClickListener(rootContainer);
+  addMouseDragListener(rootContainer, mapContainer);
   addZoomListener(rootContainer, mapContainer);
 
   const charm = await drawCharm("fury_of_the_fallen");
@@ -85,12 +88,62 @@ const drawCharm = async (id: string) => {
   return element;
 };
 
-const addMouseClickListener = (container: Container) => {
-  container.on("pointerdown", (event: FederatedPointerEvent) => {
-    console.log("global click:", { x: event.x, y: event.y });
-    console.log("local click:", event.getLocalPosition(container));
+const addMouseDragListener = (
+  container: Container,
+  mapContainer: Container,
+) => {
+  container.on("pointerdown", onDragStart, {
+    container: container,
+    mapContainer: mapContainer,
+  });
+
+  container.on("pointerup", () => {
+    onDragEnd(container);
+  });
+  container.on("pointerupoutside", () => {
+    onDragEnd(container);
   });
 };
+
+function onDragStart() {
+  console.log("Starting dragging");
+
+  // @ts-expect-error
+  let { container, mapContainer } = this;
+
+  dragTarget = mapContainer;
+  container.on("pointermove", onDragMove, container);
+
+  console.log("dragTarget", dragTarget);
+}
+
+function onDragMove(event: FederatedPointerEvent) {
+  // console.log("Moving...");
+  // @ts-expect-error
+  const newPoint = dragTarget.parent.toLocal(
+    event.global,
+    // @ts-expect-error
+    this,
+    // @ts-expect-error
+    dragTarget.position,
+  );
+}
+
+const onDragEnd = (container: Container) => {
+  console.log("Ending dragging");
+  if (dragTarget) {
+    container.off("pointermove", onDragMove);
+    dragTarget.alpha = 1;
+    dragTarget = null;
+  }
+};
+
+// const addMouseClickListener = (container: Container) => {
+//   container.on("pointerdown", (event: FederatedPointerEvent) => {
+//     console.log("global click:", { x: event.x, y: event.y });
+//     console.log("local click:", event.getLocalPosition(container));
+//   });
+// };
 
 const addZoomListener = (container: Container, mapContainer: Container) => {
   container.on("wheel", (event: FederatedWheelEvent) => {

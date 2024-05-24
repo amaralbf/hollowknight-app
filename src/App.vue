@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { initCanvas } from "./pixi.ts";
+// import { initCanvas } from "./pixi.ts";
+import { initCanvas } from "./pixiLearning.ts";
 
 onMounted(() => {
   initCanvas();
