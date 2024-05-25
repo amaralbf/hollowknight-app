@@ -38,7 +38,7 @@ export const initCanvas = async () => {
 };
 
 const createCharm = async (id: string, x: number, y: number) => {
-  const texture = await PIXI.Assets.load(`src/assets/images/${id}.png`);
+  const texture = await PIXI.Assets.load(`images/${id}.png`);
   const charm = new PIXI.Sprite(texture);
 
   charm.anchor.set(0.5);
