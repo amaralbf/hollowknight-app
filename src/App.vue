@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 // import { initCanvas } from "./pixi.ts";
-import { initCanvas } from "./pixiLearning.ts";
+import { initCanvas } from "./pixi.ts";
 
 onMounted(() => {
   initCanvas();
@@ -12,4 +12,8 @@ onMounted(() => {
   <div id="pixijs-canvas"></div>
 </template>
 
-<style scoped></style>
+<style scoped>
+#pixijs-canvas {
+  margin-top: 3rem;
+}
+</style>
