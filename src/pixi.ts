@@ -13,7 +13,7 @@ export const initCanvas = async () => {
   const mapContainer = await createMapContainer();
   rootContainer.addChild(mapContainer);
 
-  const minZoomLevel = calculateMinZoomLevel(app, mapContainer);
+  const minZoomLevel = calculateMinZoomLevel(app, mapContainer) - 0.1;
   console.log("minZoomLevel", minZoomLevel);
 
   mapContainer.scale.set(minZoomLevel);
