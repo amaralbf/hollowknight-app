@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="200"
+   height="200"
+   viewBox="0 0 200.00001 200"
+   sodipodi:docname="or.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:zoom="1.7775385"
+     inkscape:cx="114.76545"
+     inkscape:cy="121.23507"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g1"
+     transform="translate(-217.34535,-92.593566)">
+    <text
+       xml:space="preserve"
+       style="font-size:140.629px;fill:#111111;fill-opacity:1;stroke:#191718;stroke-width:2.19733;stroke-opacity:1"
+       x="231.85556"
+       y="237.0208"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="231.85556"
+         y="237.0208"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:140.629px;font-family:Calibri;-inkscape-font-specification:Calibri;fill:#111111;fill-opacity:1;stroke:#191718;stroke-width:2.19733;stroke-opacity:1">OR</tspan></text>
+  </g>
+</svg>
