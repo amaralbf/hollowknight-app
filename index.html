@@ -15,7 +15,7 @@
         // Check if the URL has a path and redirect if necessary
         if (window.location.pathname !== '/') {
           var redirectPath = window.location.pathname + window.location.search + window.location.hash;
-          window.history.replaceState(null, null, '/');
+          window.history.replaceState(null, null, '/hollowknight-app/');
           window.location.href = redirectPath;
         }
       </script>
