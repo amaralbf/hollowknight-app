@@ -6,7 +6,7 @@ import GraphPage from "./views/GraphPage.vue";
 
 const routes = [
   {
-    path: "/hollowknight-app/",
+    path: "/",
     component: MainLayout,
     children: [
       { path: "", name: "map", component: HKMapPage },
@@ -16,7 +16,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory("/hollowknight-app/"),
   routes,
 });
 
