@@ -11,14 +11,6 @@
 <body>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
-    <script>
-        // Check if the URL has a path and redirect if necessary
-        if (window.location.pathname !== '/') {
-          var redirectPath = window.location.pathname + window.location.search + window.location.hash;
-          window.history.replaceState(null, null, '/');
-          window.location.href = redirectPath;
-        }
-      </script>
 </body>
 
 </html>
