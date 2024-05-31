@@ -1,12 +1,12 @@
 // src/router.js
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import MainLayout from "./layouts/MainLayout.vue";
 import HKMapPage from "./views/HKMapPage.vue";
 import GraphPage from "./views/GraphPage.vue";
 
 const routes = [
   {
-    path: "/hollowknight-app/",
+    path: "/",
     component: MainLayout,
     children: [
       { path: "", name: "map", component: HKMapPage },
@@ -16,7 +16,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory("/hollowknight-app/"),
   routes,
 });
 
