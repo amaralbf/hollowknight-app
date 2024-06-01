@@ -3629,7 +3629,7 @@ const grubs = [
   },
 ];
 
-export const graph_content: Array<GraphJsonElement> = [
+export const elements: Array<GraphJsonElement> = [
   ...graph_content_misc,
   ...mask_shards,
   ...vessel_fragments,

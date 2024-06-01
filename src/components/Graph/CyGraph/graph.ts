@@ -5,13 +5,13 @@ import cytoscape, {
 } from "cytoscape";
 import klay from "cytoscape-klay";
 import {
-  graph_content,
+  elements,
   GraphJsonElement,
   JsonDependency,
   JsonMultiplePathsDependencies,
   JsonObjectDependency,
   JsonDependencies,
-} from "./data/graph_data";
+} from "../../../composables/elements";
 import { searchPaths } from "./pathSearch";
 import { clickOnNode } from "./progression";
 
@@ -413,7 +413,7 @@ class Graph {
 }
 
 export function buildGraph(): cytoscape.Core {
-  graph = new Graph(graph_content);
+  graph = new Graph(elements);
 
   let cy = cytoscape({
     container: document.getElementById("cy"),
