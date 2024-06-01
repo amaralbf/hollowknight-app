@@ -55,11 +55,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "soul_eater",
     name: "Soul Eater",
-    depends_on: [
-      "dream_nail",
-      "desolate_dive",
-      { id: "lumafly_lantern", classes: "extra-info" },
-    ],
+    depends_on: ["dream_nail", "desolate_dive"],
     type: "Charm",
     location: "Resting Grounds",
     img: "soul_eater.png",
@@ -1698,7 +1694,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "access_royal_waterways",
     name: "Access Royal Waterways\n(from City of Tears)",
-    depends_on: ["city_of_tears", "lumafly_lantern", "simple_key"],
+    depends_on: ["city_of_tears", "simple_key"],
     type: "Action",
     location: "City of Tears",
     img: "simple_key.png",
@@ -1925,11 +1921,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "grey_mourner",
     name: "Grey Mourner",
-    depends_on: [
-      "dream_nail",
-      "desolate_dive",
-      { id: "lumafly_lantern", classes: "extra-info" },
-    ],
+    depends_on: ["dream_nail", "desolate_dive"],
     type: "Character",
     location: "Resting Grounds",
     img: "grey_mourner.png",
@@ -1985,7 +1977,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "deepnest",
     name: "Deepnest\n(main areas)",
-    depends_on: ["mantis_claw", "lumafly_lantern"],
+    depends_on: ["mantis_claw"],
     type: "Area",
     location: "Deepnest",
     img: "deepnest.png",
@@ -2972,11 +2964,7 @@ const hallownest_seals = [
   {
     id: "hallownest_seal_9",
     name: "Hallownest Seal #9\n(Resting Grounds)",
-    depends_on: [
-      "dream_nail",
-      "desolate_dive",
-      { id: "lumafly_lantern", classes: "extra-info" },
-    ],
+    depends_on: ["dream_nail", "desolate_dive"],
     type: "Hallownest Seal",
     location: "Resting Grounds",
     img: "hallownest_seal.png",
@@ -3128,11 +3116,7 @@ const wanderers_journal = [
   {
     id: "wanderers_journal_10",
     name: "Wanderer's Journal #10\n(Resting Grounds)",
-    depends_on: [
-      "dream_nail",
-      "desolate_dive",
-      { id: "lumafly_lantern", classes: "extra-info" },
-    ],
+    depends_on: ["dream_nail", "desolate_dive"],
     type: "Wanderer's Journal",
     location: "Resting Grounds",
     img: "wanderers_journal.png",
@@ -3401,11 +3385,7 @@ const grubs = [
   {
     id: "grub_24",
     name: "Grub #24",
-    depends_on: [
-      "dream_nail",
-      "desolate_dive",
-      { id: "lumafly_lantern", classes: "extra-info" },
-    ],
+    depends_on: ["dream_nail", "desolate_dive"],
     type: "Grub",
     location: "Resting Grounds",
     img: "grubs/Grub_Resting_Grounds_Location_24.png",
