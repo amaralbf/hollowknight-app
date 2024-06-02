@@ -1141,14 +1141,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "no_eyes",
     name: "No Eyes",
-    depends_on: [
-      "greenpath",
-      "dream_nail",
-      {
-        id: "lumafly_lantern",
-        classes: "extra-info",
-      },
-    ],
+    depends_on: ["greenpath", "dream_nail", "lumafly_lantern"],
     type: "Boss",
     location: "Greenpath",
     img: "no_eyes.png",
