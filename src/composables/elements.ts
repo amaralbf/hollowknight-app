@@ -677,7 +677,6 @@ export const graph_content_misc: Array<GraphJsonElement> = [
           },
         ],
         ["crystal_heart"],
-        ["monarch_wings"],
         ["tram_pass"],
         ["east_side_city_of_tears"],
       ],
