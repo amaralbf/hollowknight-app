@@ -280,7 +280,6 @@ class Graph {
       {
         selector: "edge.or_0",
         style: {
-          "line-style": "dashed",
           "line-color": "#f90",
           "target-arrow-color": "#f90",
         },
@@ -288,7 +287,6 @@ class Graph {
       {
         selector: "edge.or_1",
         style: {
-          "line-style": "dashed",
           "line-color": "#2a2",
           "target-arrow-color": "#2a2",
         },
@@ -296,7 +294,6 @@ class Graph {
       {
         selector: "edge.or_2",
         style: {
-          "line-style": "dashed",
           "line-color": "#22d",
           "target-arrow-color": "#22d",
         },
@@ -304,7 +301,6 @@ class Graph {
       {
         selector: "edge.or_3",
         style: {
-          "line-style": "dashed",
           "line-color": "#d0f",
           "target-arrow-color": "#d0f",
         },
@@ -312,7 +308,6 @@ class Graph {
       {
         selector: "edge.or_4",
         style: {
-          "line-style": "dashed",
           "line-color": "#bdbf17",
           "target-arrow-color": "#bdbf17",
         },
