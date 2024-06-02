@@ -669,7 +669,13 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     name: "Dream Nail",
     depends_on: {
       paths: [
-        ["lumafly_lantern"],
+        [
+          {
+            id: "lumafly_lantern",
+            label: "recommended",
+            classes: "extra-info",
+          },
+        ],
         ["crystal_heart"],
         ["monarch_wings"],
         ["tram_pass"],
