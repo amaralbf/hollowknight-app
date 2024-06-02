@@ -64,6 +64,22 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     img: "fury_of_the_fallen.png",
   },
   {
+    id: "dirtmouth",
+    name: "Dirtmouth",
+    depends_on: ["kings_pass"],
+    type: "Location",
+    location: "Dirtmouth",
+    img: "dirtmouth.png",
+  },
+  {
+    id: "forgotten_crossroads",
+    name: "Forgotten Crossroads",
+    depends_on: ["dirtmouth"],
+    type: "Location",
+    location: "Forgotten Crossroads",
+    img: "forgotten_crossroads.png",
+  },
+  {
     id: "soul_eater",
     name: "Soul Eater",
     depends_on: ["dream_nail", "desolate_dive"],
@@ -74,7 +90,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "cornifer_forgotten_crossroads",
     name: "Cornifer\n(Forgotten Crossroads)",
-    depends_on: [],
+    depends_on: ["forgotten_crossroads"],
     type: "Character",
     location: "Forgotten Crossroads",
     img: "cornifer.png",
@@ -137,7 +153,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "false_knight",
     name: "False Knight",
-    depends_on: [],
+    depends_on: ["forgotten_crossroads"],
     type: "Boss",
     location: "Forgotten Crossroads",
     img: "false_knight.png",
@@ -155,7 +171,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "gruz_mother",
     name: "Gruz Mother",
-    depends_on: [],
+    depends_on: ["forgotten_crossroads"],
     type: "Boss",
     location: "Forgotten Crossroads",
     img: "gruz_mother.png",
@@ -359,7 +375,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "stag_station_forgotten_crossroads",
     name: "Stag Station\n(Forgotten Crossroads)",
-    depends_on: [],
+    depends_on: ["forgotten_crossroads"],
     type: "Stag Station",
     location: "Forgotten Crossroads",
     img: "last_stag.png",
@@ -536,7 +552,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     depends_on: {
       paths: [
         ["mantis_claw"],
-        [{ id: "nail_bouncing", label: "hard to execute" }],
+        [
+          "forgotten_crossroads",
+          { id: "nail_bouncing", label: "hard to execute" },
+        ],
       ],
       common: [],
     },
@@ -547,7 +566,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "grubfather",
     name: "Grubfather",
-    depends_on: [],
+    depends_on: ["forgotten_crossroads"],
     type: "Character",
     location: "Forgotten Crossroads",
     img: "grubfather.png",
@@ -3213,7 +3232,7 @@ const grubs = [
   {
     id: "grub_1",
     name: "Grub #1",
-    depends_on: [],
+    depends_on: ["forgotten_crossroads"],
     type: "Grub",
     location: "Forgotten Crossroads",
     img: "grubs/Grub_Forgotten_Crossroads_Location_1.png",
@@ -3222,7 +3241,7 @@ const grubs = [
   {
     id: "grub_2",
     name: "Grub #2",
-    depends_on: [],
+    depends_on: ["forgotten_crossroads"],
     type: "Grub",
     location: "Forgotten Crossroads",
     img: "grubs/Grub_Forgotten_Crossroads_Location_2.png",
@@ -3231,7 +3250,7 @@ const grubs = [
   {
     id: "grub_3",
     name: "Grub #3",
-    depends_on: [],
+    depends_on: ["forgotten_crossroads"],
     type: "Grub",
     location: "Forgotten Crossroads",
     img: "grubs/Grub_Forgotten_Crossroads_Location_3.png",
@@ -3240,7 +3259,7 @@ const grubs = [
   {
     id: "grub_4",
     name: "Grub #4",
-    depends_on: ["nail_bouncing"],
+    depends_on: ["nail_bouncing", "forgotten_crossroads"],
     type: "Grub",
     location: "Forgotten Crossroads",
     img: "grubs/Grub_Forgotten_Crossroads_Location_4.png",
