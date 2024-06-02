@@ -216,7 +216,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rancid_egg_9",
     name: "Rancid Egg #9 (Deepnest)",
-    depends_on: ["deepnest"],
+    depends_on: [
+      "deepnest",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Rancid Egg",
     location: "Crystal Peak",
     img: "rancid_egg.png",
@@ -224,7 +227,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rancid_egg_10",
     name: "Rancid Egg #10 (Deepnest)",
-    depends_on: ["deepnest"],
+    depends_on: [
+      "deepnest",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Rancid Egg",
     location: "Crystal Peak",
     img: "rancid_egg.png",
@@ -232,7 +238,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rancid_egg_11",
     name: "Rancid Egg #11 (Beast's Den)",
-    depends_on: ["deepnest"],
+    depends_on: [
+      "deepnest",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Rancid Egg",
     location: "Crystal Peak",
     img: "rancid_egg.png",
@@ -395,7 +404,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "stag_station_distant_village",
     name: "Stag Station\n(Distant Village)",
-    depends_on: ["deepnest"],
+    depends_on: [
+      "deepnest",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Stag Station",
     location: "Deepnest",
     img: "last_stag.png",
@@ -721,7 +733,11 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "whispering_root_deepnest",
     name: "Whispering Root\n(Deepnest)",
-    depends_on: ["deepnest", "dream_nail"],
+    depends_on: [
+      "deepnest",
+      "dream_nail",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Whispering Root",
     location: "Deepnest",
     img: "whispering_root.png",
@@ -1239,7 +1255,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "jonis_blessing",
     name: "Joni's Blessing",
-    depends_on: ["mantis_claw"],
+    depends_on: [
+      "mantis_claw",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Charm",
     location: "Howling Cliffs",
     img: "jonis_blessing.png",
@@ -1395,7 +1414,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "brumms_flame",
     name: "Brumm's Flame",
-    depends_on: ["grimmchild_3"],
+    depends_on: [
+      "grimmchild_3",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Character",
     location: "Deepnest",
     img: "brumm.png",
@@ -1646,7 +1668,11 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     name: "Descending Dark",
     depends_on: {
       paths: [["crystal_heart"], ["monarch_wings"]],
-      common: ["crystal_peak", "desolate_dive", "lumafly_lantern"],
+      common: [
+        "crystal_peak",
+        "desolate_dive",
+        { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+      ],
     },
     type: "Ability",
     location: "Crystal Peak",
@@ -1986,7 +2012,11 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "galien",
     name: "Galien",
-    depends_on: ["deepnest", "dream_nail"],
+    depends_on: [
+      "deepnest",
+      "dream_nail",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Boss",
     location: "Deepnest",
     img: "galien.png",
@@ -2007,7 +2037,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     name: "Weaversong",
     depends_on: {
       paths: [["crystal_heart"], ["monarch_wings"], ["nail_bouncing"]],
-      common: ["deepnest"],
+      common: [
+        "deepnest",
+        { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+      ],
     },
     type: "Charm",
     location: "Deepnest",
@@ -2016,7 +2049,11 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "herrah_the_beast",
     name: "Herrah the Beast",
-    depends_on: ["deepnest", "dream_nail"],
+    depends_on: [
+      "deepnest",
+      "dream_nail",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Dreamer",
     location: "Deepnest",
     img: "herrah_the_beast.png",
@@ -2330,6 +2367,11 @@ export const graph_content_misc: Array<GraphJsonElement> = [
             label: "Little Weaver",
           },
           "deepnest",
+          {
+            id: "lumafly_lantern",
+            label: "recommended",
+            classes: "extra-info",
+          },
         ],
       ],
       common: [],
@@ -2721,10 +2763,7 @@ const mask_shards = [
     name: "Mask Shard #10\n(Stone Sanctuary)",
     depends_on: [
       "greenpath",
-      {
-        id: "lumafly_lantern",
-        classes: "extra-info",
-      },
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
     ],
     type: "Mask Shard",
     location: "Greenpath",
@@ -3010,7 +3049,10 @@ const hallownest_seals = [
   {
     id: "hallownest_seal_15",
     name: "Hallownest Seal #15\n(Beast's Den)",
-    depends_on: ["deepnest"],
+    depends_on: [
+      "deepnest",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Hallownest Seal",
     location: "Deepnest",
     img: "hallownest_seal.png",
@@ -3368,7 +3410,10 @@ const grubs = [
     name: "Grub #23",
     depends_on: {
       paths: [["crystal_heart"], ["monarch_wings"]],
-      common: ["crystal_peak"],
+      common: [
+        "crystal_peak",
+        { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+      ],
     },
     type: "Grub",
     location: "Crystal Peak",
@@ -3522,7 +3567,10 @@ const grubs = [
   {
     id: "grub_38",
     name: "Grub #38",
-    depends_on: ["deepnest"],
+    depends_on: [
+      "deepnest",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Grub",
     location: "Deepnest",
     img: "grubs/Grub_Deepnest_Location_38.png",
@@ -3531,7 +3579,10 @@ const grubs = [
   {
     id: "grub_39",
     name: "Grub #39",
-    depends_on: ["deepnest"],
+    depends_on: [
+      "deepnest",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Grub",
     location: "Deepnest",
     img: "grubs/Grub_Deepnest_Location_39.png",
