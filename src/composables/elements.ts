@@ -771,7 +771,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "whispering_root_fungal_wastes_1",
     name: "Whispering Root\n(Fungal Wastes #1)",
-    depends_on: ["ismas_tear"],
+    depends_on: {
+      paths: [["ismas_tear"], ["shade_cloak"]],
+      common: [],
+    },
     type: "Whispering Root",
     location: "Fungal Wastes",
     img: "whispering_root.png",
