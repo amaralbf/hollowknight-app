@@ -80,6 +80,22 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     img: "forgotten_crossroads.png",
   },
   {
+    id: "fog_canyon",
+    name: "Fog Canyon (West side)",
+    depends_on: ["greenpath"],
+    type: "Location",
+    location: "Fog Canyon",
+    img: "fog_canyon.png",
+  },
+  // {
+  //   id: "fungal_wastes",
+  //   name: "Fungal Wastes",
+  //   depends_on: [""],
+  //   type: "Location",
+  //   location: "Fungal Wastes",
+  //   img: "fungal_wastes.png",
+  // },
+  {
     id: "soul_eater",
     name: "Soul Eater",
     depends_on: ["dream_nail", "desolate_dive"],
@@ -99,7 +115,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "iseldas_shop",
     name: "Iselda's shop",
-    depends_on: ["cornifer_forgotten_crossroads"],
+    depends_on: {
+      paths: [["cornifer_forgotten_crossroads"], ["false_knight"]],
+      common: [],
+    },
     type: "Vendor",
     location: "Dirtmouth",
     img: "iselda.png",
@@ -677,7 +696,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "millibelle",
     name: "Millibelle",
-    depends_on: ["greenpath"],
+    depends_on: ["fog_canyon"],
     type: "Vendor",
     location: "Fog Canyon",
     img: "millibelle.png",
@@ -2018,7 +2037,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "howling_wraiths",
     name: "Howling Wraiths",
-    depends_on: ["mantis_claw"],
+    depends_on: ["mantis_claw", "fog_canyon"],
     type: "Ability",
     location: "Fog Canyon",
     img: "howling_wraiths.png",
@@ -3018,7 +3037,7 @@ const hallownest_seals = [
   {
     id: "hallownest_seal_7",
     name: "Hallownest Seal #7\n(Fog Canyon)",
-    depends_on: ["mantis_claw"],
+    depends_on: ["fog_canyon"],
     type: "Hallownest Seal",
     location: "Fog Canyon",
     img: "hallownest_seal.png",
