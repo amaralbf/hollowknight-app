@@ -87,14 +87,22 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     location: "Fog Canyon",
     img: "fog_canyon.png",
   },
-  // {
-  //   id: "fungal_wastes",
-  //   name: "Fungal Wastes",
-  //   depends_on: [""],
-  //   type: "Location",
-  //   location: "Fungal Wastes",
-  //   img: "fungal_wastes.png",
-  // },
+  {
+    id: "queens_station",
+    name: "Queen's Station",
+    depends_on: { paths: [["fog_canyon"], ["fungal_wastes"]], common: [] },
+    type: "Location",
+    location: "Fungal Wastes",
+    img: "queens_station.png",
+  },
+  {
+    id: "fungal_wastes",
+    name: "Fungal Wastes",
+    depends_on: ["mothwing_cloak"],
+    type: "Location",
+    location: "Fungal Wastes",
+    img: "fungal_wastes.png",
+  },
   {
     id: "soul_eater",
     name: "Soul Eater",
@@ -410,7 +418,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "stag_station_queens_station",
     name: "Stag Station\n(Queen's Station)",
-    depends_on: ["greenpath"],
+    depends_on: ["queens_station"],
     type: "Stag Station",
     location: "Queen's Station",
     img: "last_stag.png",
@@ -926,7 +934,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "charm_notch_6",
     name: "Charm Notch #6",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["fungal_wastes"],
     type: "Charm Notch",
     location: "Fungal Wastes",
     img: "charm_notch.png",
@@ -948,9 +956,17 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     img: "charm_notch.png",
   },
   {
+    id: "leg_eater",
+    name: "Leg Eater",
+    depends_on: ["fungal_wastes"],
+    type: "Vendor",
+    location: "Fungal Wastes",
+    img: "leg_eater.png",
+  },
+  {
     id: "fragile_heart",
     name: "Fragile Heart",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["leg_eater"],
     type: "Charm",
     location: "Fungal Wastes",
     img: "fragile_heart.png",
@@ -958,7 +974,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "fragile_greed",
     name: "Fragile Greed",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["leg_eater"],
     type: "Charm",
     location: "Fungal Wastes",
     img: "fragile_greed.png",
@@ -966,7 +982,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "fragile_strength",
     name: "Fragile Strength",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["leg_eater"],
     type: "Charm",
     location: "Fungal Wastes",
     img: "fragile_strength.png",
@@ -1006,7 +1022,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "dashmaster",
     name: "Dashmaster",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["fungal_wastes"],
     type: "Charm",
     location: "Fungal Wastes",
     img: "dashmaster.png",
@@ -1014,7 +1030,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "mantis_claw",
     name: "Mantis Claw",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["fungal_wastes"],
     type: "Ability",
     location: "Mantis Village",
     img: "mantis_claw.png",
@@ -2045,7 +2061,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "elder_hu",
     name: "Elder Hu",
-    depends_on: ["mothwing_cloak", "dream_nail"],
+    depends_on: ["fungal_wastes", "dream_nail"],
     type: "Boss",
     location: "Fungal Wastes",
     img: "elder_hu.png",
@@ -3013,7 +3029,7 @@ const hallownest_seals = [
   {
     id: "hallownest_seal_4",
     name: "Hallownest Seal #4\n(Fungal Wastes)",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["fungal_wastes"],
     type: "Hallownest Seal",
     location: "Fungal Wastes",
     img: "hallownest_seal.png",
@@ -3345,7 +3361,7 @@ const grubs = [
   {
     id: "grub_10",
     name: "Grub #10",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["fungal_wastes"],
     type: "Grub",
     location: "Fungal Wastes",
     img: "grubs/Grub_Fungal_Wastes_Location_10.png",
