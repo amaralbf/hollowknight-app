@@ -104,6 +104,14 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     img: "fungal_wastes.png",
   },
   {
+    id: "howling_cliffs",
+    name: "Howling Cliffs",
+    depends_on: ["mantis_claw"],
+    type: "Location",
+    location: "Howling Cliffs",
+    img: "howling_cliffs.png",
+  },
+  {
     id: "soul_eater",
     name: "Soul Eater",
     depends_on: ["dream_nail", "desolate_dive"],
@@ -189,7 +197,14 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rescue_sly",
     name: "Rescue Sly",
-    depends_on: ["gruz_mother"],
+    depends_on: {
+      paths: [
+        ["gruz_mother"],
+        ["resting_grounds_lower"],
+        ["dream_nail", "desolate_dive"],
+      ],
+      common: [],
+    },
     type: "Character",
     location: "Forgotten Crossroads",
     img: "rescue_sly.png",
@@ -214,7 +229,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rancid_egg_1",
     name: "Rancid Egg #1\n(Steel Soul - Tuk's Corpse)",
-    depends_on: ["steel_soul", "access_royal_waterways"],
+    depends_on: ["steel_soul", "royal_waterways"],
     type: "Rancid Egg",
     location: "Royal Waterways",
     img: "rancid_egg.png",
@@ -354,7 +369,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rancid_egg_18",
     name: "Rancid Egg #18 (Royal Waterways)",
-    depends_on: ["access_royal_waterways"],
+    depends_on: ["royal_waterways"],
     type: "Rancid Egg",
     location: "Royal Waterways",
     img: "rancid_egg.png",
@@ -362,7 +377,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rancid_egg_19",
     name: "Rancid Egg #19 (Royal Waterways)",
-    depends_on: ["access_royal_waterways"],
+    depends_on: ["royal_waterways"],
     type: "Rancid Egg",
     location: "Royal Waterways",
     img: "rancid_egg.png",
@@ -370,7 +385,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rancid_egg_20",
     name: "Rancid Egg #20 (Royal Waterways)",
-    depends_on: ["access_royal_waterways"],
+    depends_on: ["royal_waterways"],
     type: "Rancid Egg",
     location: "Royal Waterways",
     img: "rancid_egg.png",
@@ -378,7 +393,10 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "rancid_egg_21",
     name: "Rancid Egg #21 (Isma's Grove)",
-    depends_on: ["access_royal_waterways"],
+    depends_on: {
+      paths: [["royal_waterways"], ["crystal_heart", "tram_pass"]],
+      common: [],
+    },
     type: "Rancid Egg",
     location: "Royal Waterways",
     img: "rancid_egg.png",
@@ -724,22 +742,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "dream_nail",
     name: "Dream Nail",
-    depends_on: {
-      paths: [
-        [
-          {
-            id: "lumafly_lantern",
-            label: "recommended",
-            classes: "extra-info",
-          },
-        ],
-        ["crystal_heart"],
-        ["tram_pass"],
-        ["east_side_city_of_tears"],
-      ],
-      // tram pass
-      common: [],
-    },
+    depends_on: ["resting_grounds_upper"],
     type: "Weapon",
     location: "Resting Grounds",
     img: "dream_nail.png",
@@ -847,7 +850,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "whispering_root_howling_cliffs",
     name: "Whispering Root\n(Howling Cliffs)",
-    depends_on: ["dream_nail", "mantis_claw"],
+    depends_on: ["dream_nail", "howling_cliffs"],
     type: "Whispering Root",
     location: "Howling Cliffs",
     img: "whispering_root.png",
@@ -1093,7 +1096,14 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "salubras_shop",
     name: "Salubra's Shop",
-    depends_on: ["mothwing_cloak"],
+    depends_on: {
+      paths: [
+        ["gruz_mother", "mothwing_cloak"],
+        ["resting_grounds_lower"],
+        ["dream_nail", "desolate_dive"],
+      ],
+      common: [],
+    },
     type: "Shop",
     location: "Forgotten Crossroads",
     img: "salubra.png",
@@ -1238,7 +1248,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "cyclone_slash",
     name: "Cyclone Slash",
-    depends_on: ["mantis_claw"],
+    depends_on: ["howling_cliffs"],
     type: "Ability",
     location: "Howling Cliffs",
     img: "cyclone_slash.png",
@@ -1246,7 +1256,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "gorb",
     name: "Gorb",
-    depends_on: ["mantis_claw", "dream_nail"],
+    depends_on: ["howling_cliffs", "dream_nail"],
     type: "Boss",
     location: "Howling Cliffs",
     img: "gorb.png",
@@ -1269,7 +1279,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     name: "King's Idol #2\n(Crystal Peak)",
     depends_on: ["crystal_peak", "monarch_wings"],
     type: "King's Idol",
-    location: "Howling Cliffs",
+    location: "Crystal Peak",
     img: "kings_idol.png",
   },
   {
@@ -1282,7 +1292,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
       },
     ],
     type: "King's Idol",
-    location: "Howling Cliffs",
+    location: "Resting Grounds",
     img: "kings_idol.png",
   },
   {
@@ -1296,7 +1306,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "kings_idol_5",
     name: "King's Idol #5\n(Howling Cliffs)",
-    depends_on: ["mantis_claw"],
+    depends_on: ["howling_cliffs"],
     type: "King's Idol",
     location: "Howling Cliffs",
     img: "kings_idol.png",
@@ -1329,7 +1339,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     id: "jonis_blessing",
     name: "Joni's Blessing",
     depends_on: [
-      "mantis_claw",
+      "howling_cliffs",
       { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
     ],
     type: "Charm",
@@ -1339,7 +1349,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "grimm_quest",
     name: "Start Grimm Troupe's Quest",
-    depends_on: ["mantis_claw", "dream_nail"],
+    depends_on: ["howling_cliffs", "dream_nail"],
     type: "Action",
     location: "Howling Cliffs",
     img: "grimm_quest.png",
@@ -1483,6 +1493,14 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     type: "Charm",
     location: "Dirtmouth",
     img: "grimmchild_3.png",
+  },
+  {
+    id: "grimmchild_4",
+    name: "Grimmchild (Phase 4)",
+    depends_on: ["nightmare_king_grimm"],
+    type: "Charm",
+    location: "Dirtmouth",
+    img: "grimmchild_4.png",
   },
   {
     id: "brumms_flame",
@@ -1784,17 +1802,23 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     img: "ismas_tear.png",
   },
   {
-    id: "access_royal_waterways",
-    name: "Access Royal Waterways\n(from City of Tears)",
-    depends_on: ["city_of_tears", "simple_key"],
-    type: "Action",
-    location: "City of Tears",
-    img: "simple_key.png",
+    id: "royal_waterways",
+    name: "Royal Waterways",
+    depends_on: {
+      paths: [
+        ["city_of_tears", "simple_key"],
+        ["crystal_heart", "tram_pass"],
+      ],
+      common: [],
+    },
+    type: "Location",
+    location: "Royal Waterways",
+    img: "royal_waterways.png",
   },
   {
     id: "dung_defender",
     name: "Dung Defender",
-    depends_on: ["access_royal_waterways"],
+    depends_on: ["royal_waterways"],
     type: "Boss",
     location: "Royal Waterways",
     img: "dung_defender.png",
@@ -1846,7 +1870,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "arcane_egg_1",
     name: "Arcane Egg #1",
-    depends_on: [{ id: "kings_brand", label: "14 or 15 lifeblood masks" }],
+    depends_on: [{ id: "the_abyss", label: "14 or 15 Lifeblood masks" }],
     type: "Arcane Egg",
     location: "The Abyss",
     img: "arcane_egg.png",
@@ -1862,7 +1886,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "arcane_egg_3",
     name: "Arcane Egg #3",
-    depends_on: ["kings_brand", "kingsoul", "desolate_dive"],
+    depends_on: ["the_abyss", "kingsoul", "desolate_dive"],
     type: "Arcane Egg",
     location: "The Abyss",
     img: "arcane_egg.png",
@@ -1883,7 +1907,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "flukemarm",
     name: "Flukemarm",
-    depends_on: ["access_royal_waterways", "desolate_dive"],
+    depends_on: ["royal_waterways", "desolate_dive"],
     type: "Boss",
     location: "Royal Waterways",
     img: "flukemarm.png",
@@ -1899,7 +1923,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "godseeker",
     name: "Godseeker (Junk Pit)",
-    depends_on: ["access_royal_waterways", "desolate_dive"],
+    depends_on: ["royal_waterways", "desolate_dive"],
     type: "Character",
     location: "Royal Waterways",
     img: "godseeker.png",
@@ -1907,7 +1931,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "godtuner",
     name: "Godtuner",
-    depends_on: ["access_royal_waterways", "desolate_dive"],
+    depends_on: ["royal_waterways", "desolate_dive"],
     type: "Item",
     location: "Royal Waterways",
     img: "godtuner.png",
@@ -1915,7 +1939,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "tuk",
     name: "Tuk",
-    depends_on: ["access_royal_waterways"],
+    depends_on: ["royal_waterways"],
     type: "Vendor",
     location: "Royal Waterways",
     img: "tuk.png",
@@ -2135,11 +2159,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     id: "ancient_basin",
     name: "Ancient Basin",
     depends_on: {
-      paths: [
-        ["access_royal_waterways"],
-        ["tram_pass"],
-        ["east_side_city_of_tears"],
-      ],
+      paths: [["royal_waterways"], ["tram_pass"], ["east_side_city_of_tears"]],
       common: [],
     },
     type: "Location",
@@ -2293,7 +2313,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "shade_cloak",
     name: "Shade Cloak",
-    depends_on: ["kings_brand"],
+    depends_on: ["the_abyss"],
     type: "Ability",
     location: "The Abyss",
     img: "shade_cloak.png",
@@ -2303,7 +2323,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     name: "Sharp Shadow",
     depends_on: ["shade_cloak", "deepnest"],
     type: "Charm",
-    location: "The Abyss",
+    location: "Deepnest",
     img: "sharp_shadow.png",
   },
   {
@@ -2428,17 +2448,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
         ["shade_cloak"],
         ["ismas_tear"],
         [
-          {
-            id: "crystal_heart",
-            label: "hard to execute",
-          },
-        ],
-        ["monarch_wings"],
-        [
-          {
-            id: "nail_bouncing",
-            label: "Little Weaver",
-          },
+          "monarch_wings",
           "deepnest",
           {
             id: "lumafly_lantern",
@@ -2480,7 +2490,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
   {
     id: "abyss_shriek",
     name: "Abyss Shriek",
-    depends_on: ["kings_brand", "howling_wraiths"],
+    depends_on: ["the_abyss", "howling_wraiths"],
     type: "Ability",
     location: "The Abyss",
     img: "abyss_shriek.png",
@@ -2490,7 +2500,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     name: "Markoth",
     depends_on: ["shade_cloak", "dream_nail"],
     type: "Boss",
-    location: "The Abyss",
+    location: "Kingdom's Edge",
     img: "markoth.png",
   },
   {
@@ -2568,17 +2578,17 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     img: "kingsoul.png",
   },
   {
-    id: "lifeblood_heart",
-    name: "Lifeblood Heart",
-    depends_on: [{ id: "kings_brand", label: "14 or 15 lifeblood masks" }],
+    id: "lifeblood_core",
+    name: "Lifeblood Core",
+    depends_on: [{ id: "the_abyss", label: "14 or 15 Lifeblood masks" }],
     type: "Charm",
     location: "The Abyss",
-    img: "lifeblood_heart.png",
+    img: "lifeblood_core.png",
   },
   {
     id: "void_heart",
     name: "Void Heart",
-    depends_on: ["kings_brand", "kingsoul", "desolate_dive", "dream_nail"],
+    depends_on: ["the_abyss", "kingsoul", "dream_nail"],
     type: "Charm",
     location: "The Abyss",
     img: "void_heart.png",
@@ -2751,6 +2761,62 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     location: "Dirtmouth",
     img: "steelsoul_jinn.png",
   },
+  {
+    id: "resting_grounds_upper",
+    name: "Resting Grounds\n(Upper Entrance)",
+    depends_on: {
+      paths: [
+        [
+          {
+            id: "lumafly_lantern",
+            label: "recommended",
+            classes: "extra-info",
+          },
+        ],
+        ["tram_pass"],
+        ["resting_grounds_lower"],
+      ],
+      common: [],
+    },
+    type: "Location",
+    location: "Resting Grounds",
+    img: "resting_grounds.png",
+  },
+  {
+    id: "resting_grounds_lower",
+    name: "Resting Grounds\n(Lower Entrance)",
+    depends_on: {
+      paths: [["crystal_heart"], ["east_side_city_of_tears"]],
+      common: [],
+    },
+    type: "Location",
+    location: "Resting Grounds",
+    img: "resting_grounds.png",
+  },
+  {
+    id: "the_abyss",
+    name: "The Abyss",
+    depends_on: ["kings_brand"],
+    type: "Location",
+    location: "The Abyss",
+    img: "the_abyss.png",
+  },
+  {
+    id: "infected_crossroads",
+    name: "Infected Crossroads",
+    depends_on: {
+      paths: [
+        ["monarch_wings"],
+        ["monomon_the_teacher"],
+        ["herrah_the_beast"],
+        ["lurien_the_watcher"],
+      ],
+      common: [],
+    },
+    type: "Location",
+    location: "Infected Crossroads",
+    img: "infected_crossroads.png",
+  },
 ];
 
 const mask_shards = [
@@ -2845,7 +2911,7 @@ const mask_shards = [
   {
     id: "mask_shard_11",
     name: "Mask Shard #11\n(Royal Waterways)",
-    depends_on: ["access_royal_waterways"],
+    depends_on: ["royal_waterways"],
     type: "Mask Shard",
     location: "Royal Waterways",
     img: "mask_shard.png",
@@ -3208,7 +3274,7 @@ const wanderers_journal = [
   {
     id: "wanderers_journal_8",
     name: "Wanderer's Journal #8\n(Howling Cliffs)",
-    depends_on: ["mantis_claw"],
+    depends_on: ["howling_cliffs"],
     type: "Wanderer's Journal",
     location: "Howling Cliffs",
     img: "wanderers_journal.png",
@@ -3294,7 +3360,10 @@ const grubs = [
   {
     id: "grub_4",
     name: "Grub #4",
-    depends_on: ["nail_bouncing", "forgotten_crossroads"],
+    depends_on: {
+      paths: [["nail_bouncing", "forgotten_crossroads"], ["monarch_wings"]],
+      common: [],
+    },
     type: "Grub",
     location: "Forgotten Crossroads",
     img: "grubs/Grub_Forgotten_Crossroads_Location_4.png",
@@ -3322,7 +3391,7 @@ const grubs = [
   {
     id: "grub_6",
     name: "Grub #6",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["greenpath"],
     type: "Grub",
     location: "Greenpath",
     img: "grubs/Grub_Greenpath_Location_6.png",
@@ -3331,10 +3400,7 @@ const grubs = [
   {
     id: "grub_7",
     name: "Grub #7",
-    depends_on: {
-      paths: [["nail_bouncing"], ["mothwing_cloak"]],
-      common: ["greenpath"],
-    },
+    depends_on: ["greenpath"],
     type: "Grub",
     location: "Greenpath",
     img: "grubs/Grub_Greenpath_Location_7.png",
@@ -3352,7 +3418,7 @@ const grubs = [
   {
     id: "grub_9",
     name: "Grub #9",
-    depends_on: ["mothwing_cloak"],
+    depends_on: ["nail_bouncing", "mothwing_cloak"],
     type: "Grub",
     location: "Greenpath",
     img: "grubs/Grub_Greenpath_Location_9.png",
@@ -3361,7 +3427,7 @@ const grubs = [
   {
     id: "grub_10",
     name: "Grub #10",
-    depends_on: ["fungal_wastes"],
+    depends_on: ["nail_bouncing", "fungal_wastes"],
     type: "Grub",
     location: "Fungal Wastes",
     img: "grubs/Grub_Fungal_Wastes_Location_10.png",
@@ -3481,13 +3547,11 @@ const grubs = [
   {
     id: "grub_23",
     name: "Grub #23",
-    depends_on: {
-      paths: [["crystal_heart"], ["monarch_wings"]],
-      common: [
-        "crystal_peak",
-        { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
-      ],
-    },
+    depends_on: [
+      "crystal_heart",
+      "desolate_dive",
+      { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
+    ],
     type: "Grub",
     location: "Crystal Peak",
     img: "grubs/Grub_Crystal_Peak_Location_23.png",
@@ -3505,9 +3569,9 @@ const grubs = [
   {
     id: "grub_25",
     name: "Grub #25",
-    depends_on: ["access_royal_waterways"],
+    depends_on: ["royal_waterways"],
     type: "Grub",
-    location: "Howling Cliffs",
+    location: "Royal Waterways",
     img: "grubs/Grub_Royal_Waterways_Location_25.png",
     classes: "round-img",
   },
@@ -3515,11 +3579,8 @@ const grubs = [
     id: "grub_26",
     name: "Grub #26",
     depends_on: {
-      paths: [
-        ["crystal_heart", "monarch_wings"],
-        ["ismas_tear", "nail_bouncing"],
-      ],
-      common: ["tram_pass"],
+      paths: [["crystal_heart"], ["ismas_tear"]],
+      common: ["tram_pass", "monarch_wings"],
     },
     type: "Grub",
     location: "Royal Waterways",
@@ -3538,7 +3599,7 @@ const grubs = [
   {
     id: "grub_28",
     name: "Grub #28",
-    depends_on: ["mantis_claw"],
+    depends_on: ["howling_cliffs"],
     type: "Grub",
     location: "Howling Cliffs",
     img: "grubs/Grub_Howling_Cliffs_Location_28.png",
@@ -3583,13 +3644,7 @@ const grubs = [
   {
     id: "grub_33",
     name: "Grub #33",
-    depends_on: {
-      paths: [
-        ["monarch_wings"],
-        [{ id: "nail_bouncing", label: "hard to execute" }],
-      ],
-      common: ["queens_gardens", "crystal_heart"],
-    },
+    depends_on: ["queens_gardens", "crystal_heart", "monarch_wings"],
     type: "Grub",
     location: "Fog Canyon",
     img: "grubs/Grub_Queens_Gardens_Location_33.png",
@@ -3682,7 +3737,7 @@ const grubs = [
   {
     id: "grub_42",
     name: "Grub #42",
-    depends_on: ["ismas_tear", "desolate_dive"],
+    depends_on: ["tram_pass", "ismas_tear", "desolate_dive"],
     type: "Grub",
     location: "The Hive",
     img: "grubs/Grub_Hive_Location_42.png",
