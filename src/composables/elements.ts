@@ -2133,7 +2133,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     id: "weaversong",
     name: "Weaversong",
     depends_on: {
-      paths: [["crystal_heart"], ["monarch_wings"], ["nail_bouncing"]],
+      paths: [["crystal_heart"], ["nail_bouncing"]],
       common: [
         "deepnest",
         { id: "lumafly_lantern", label: "recommended", classes: "extra-info" },
@@ -3579,8 +3579,8 @@ const grubs = [
     id: "grub_26",
     name: "Grub #26",
     depends_on: {
-      paths: [["crystal_heart"], ["ismas_tear"]],
-      common: ["tram_pass", "monarch_wings"],
+      paths: [["monarch_wings"], ["ismas_tear"]],
+      common: ["tram_pass"],
     },
     type: "Grub",
     location: "Royal Waterways",
@@ -3644,7 +3644,7 @@ const grubs = [
   {
     id: "grub_33",
     name: "Grub #33",
-    depends_on: ["queens_gardens", "crystal_heart", "monarch_wings"],
+    depends_on: ["queens_gardens", "crystal_heart"],
     type: "Grub",
     location: "Fog Canyon",
     img: "grubs/Grub_Queens_Gardens_Location_33.png",
