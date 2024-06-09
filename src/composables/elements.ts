@@ -833,7 +833,7 @@ export const graph_content_misc: Array<GraphJsonElement> = [
     name: "Whispering Root\n(Fungal Wastes #1)",
     depends_on: {
       paths: [["ismas_tear"], ["shade_cloak"]],
-      common: [],
+      common: ["dream_nail"],
     },
     type: "Whispering Root",
     location: "Fungal Wastes",
@@ -3361,8 +3361,8 @@ const grubs = [
     id: "grub_4",
     name: "Grub #4",
     depends_on: {
-      paths: [["nail_bouncing", "forgotten_crossroads"], ["monarch_wings"]],
-      common: [],
+      paths: [["nail_bouncing"], ["monarch_wings"]],
+      common: ["forgotten_crossroads"],
     },
     type: "Grub",
     location: "Forgotten Crossroads",
@@ -3418,7 +3418,10 @@ const grubs = [
   {
     id: "grub_9",
     name: "Grub #9",
-    depends_on: ["nail_bouncing", "mothwing_cloak"],
+    depends_on: {
+      paths: [["nail_bouncing"], ["crystal_heart"]],
+      common: [],
+    },
     type: "Grub",
     location: "Greenpath",
     img: "grubs/Grub_Greenpath_Location_9.png",
