@@ -1,16 +1,15 @@
-import { defineEmits } from "vue";
-import * as PIXI from "pixi.js";
+import * as PIXI from 'pixi.js';
 
-// const mapImgDimensions = { width: 4498, height: 2901 };
+const iconScale = 1.0;
 
 export const initCanvas = async (emitElementClick: CallableFunction) => {
   const app = new PIXI.Application();
   await app.init({
     width: 1480,
     height: 800,
-    background: "#222",
+    background: '#222',
   });
-  document.getElementById("canvas-div")?.appendChild(app.canvas);
+  document.getElementById('canvas-div')?.appendChild(app.canvas);
 
   const rootContainer = createRootContainer(app);
   app.stage.addChild(rootContainer);
@@ -19,7 +18,7 @@ export const initCanvas = async (emitElementClick: CallableFunction) => {
   rootContainer.addChild(mapContainer);
 
   const minZoomLevel = calculateMinZoomLevel(app, mapContainer);
-  console.log("minZoomLevel", minZoomLevel);
+  console.log('minZoomLevel', minZoomLevel);
 
   mapContainer.scale.set(minZoomLevel);
 
@@ -32,15 +31,17 @@ export const initCanvas = async (emitElementClick: CallableFunction) => {
   );
   clickHandler.addListeners();
 
-  const charm = await createCharm("fury_of_the_fallen", 1721, 654);
+  const charm = await createCharm('fury_of_the_fallen', 1721, 654);
+  const pin = await createPin('pin_stag_station', 2021, 581);
 
   mapContainer.addChild(charm);
+  mapContainer.addChild(pin);
 
   // @ts-expect-error
-  printContainer("app.screen", app.screen);
-  printContainer("app.stage", app.stage);
-  printContainer("rootContainer", rootContainer);
-  printContainer("mapContainer", mapContainer);
+  printContainer('app.screen', app.screen);
+  printContainer('app.stage', app.stage);
+  printContainer('rootContainer', rootContainer);
+  printContainer('mapContainer', mapContainer);
 };
 
 const createCharm = async (id: string, x: number, y: number) => {
@@ -50,20 +51,28 @@ const createCharm = async (id: string, x: number, y: number) => {
   charm.anchor.set(0.5);
   charm.x = x;
   charm.y = y;
-  charm.scale.set(0.4);
+  charm.scale.set(0.25 * iconScale);
 
   return charm;
 };
 
-const calculateMinZoomLevel = (
-  app: PIXI.Application,
-  mapContainer: PIXI.Container,
-) => {
+const createPin = async (id: string, x: number, y: number) => {
+  const texture = await PIXI.Assets.load(`images/pins/${id}.png`);
+  const pin = new PIXI.Sprite(texture);
+
+  pin.anchor.set(0.5);
+  pin.x = x;
+  pin.y = y;
+  pin.scale.set(0.6 * iconScale);
+
+  return pin;
+};
+
+const calculateMinZoomLevel = (app: PIXI.Application, mapContainer: PIXI.Container) => {
   const minXZoomLevel = app.renderer.width / mapContainer.width;
   const minYZoomLevel = app.renderer.height / mapContainer.height;
 
-  const minZoomLevel =
-    Math.ceil(Math.max(minXZoomLevel, minYZoomLevel) * 10) / 10;
+  const minZoomLevel = Math.ceil(Math.max(minXZoomLevel, minYZoomLevel) * 10) / 10;
 
   return minZoomLevel;
 };
@@ -84,7 +93,7 @@ const createRootContainer = (app: PIXI.Application) => {
   background.fill();
   container.addChild(background);
 
-  container.eventMode = "static";
+  container.eventMode = 'static';
 
   return container;
 };
@@ -97,22 +106,22 @@ const createMapContainer = async (): Promise<PIXI.Container> => {
   map.y = 0;
 
   const background = new PIXI.Graphics();
-  background.fill("#000");
+  background.fill('#000');
   background.rect(0, 0, map.width, map.height);
   background.fill();
 
   container.addChild(background);
   container.addChild(map);
 
-  container.eventMode = "static";
+  container.eventMode = 'static';
 
-  printContainer("map", map);
+  printContainer('map', map);
 
   return container;
 };
 
 const createMap = async () => {
-  const texture = await PIXI.Assets.load("hk_full_map.png");
+  const texture = await PIXI.Assets.load('hk_full_map.png');
   const map = PIXI.Sprite.from(texture);
 
   return map;
@@ -162,12 +171,12 @@ class ClickHandler {
   }
 
   addListeners() {
-    this.rootContainer.on("pointerdown", this.rootContainerClick.bind(this));
-    this.rootContainer.on("pointerup", this.stopDragging.bind(this));
-    this.rootContainer.on("pointerout", this.stopDragging.bind(this));
-    this.rootContainer.on("pointermove", this.draggingMove.bind(this));
+    this.rootContainer.on('pointerdown', this.rootContainerClick.bind(this));
+    this.rootContainer.on('pointerup', this.stopDragging.bind(this));
+    this.rootContainer.on('pointerout', this.stopDragging.bind(this));
+    this.rootContainer.on('pointermove', this.draggingMove.bind(this));
 
-    this.rootContainer.on("wheel", this.handleWheel.bind(this));
+    this.rootContainer.on('wheel', this.handleWheel.bind(this));
   }
 
   rootContainerClick(event: PIXI.FederatedPointerEvent) {
@@ -221,16 +230,12 @@ class ClickHandler {
   }
 
   handleWheel(event: PIXI.FederatedWheelEvent) {
-    console.log("handleWheel");
+    console.log('handleWheel');
     const delta = Math.sign(event.deltaY);
     const localPoint = event.global;
 
-    console.log("rootContainer", this.rootContainer.width);
-    console.log(
-      "rootContainer pos",
-      this.rootContainer.x,
-      this.rootContainer.y,
-    );
+    console.log('rootContainer', this.rootContainer.width);
+    console.log('rootContainer pos', this.rootContainer.x, this.rootContainer.y);
 
     if (delta > 0) {
       this.zoom(localPoint, -this.zoomStep);
@@ -241,10 +246,9 @@ class ClickHandler {
 
   zoom(point: PIXI.Point, zoomStep: number) {
     if (zoomStep > 0) {
-      if (this.zoomLevel.toPrecision(2) === "1.5") return;
+      if (this.zoomLevel.toPrecision(2) === '1.5') return;
     } else {
-      if (this.zoomLevel.toPrecision(1) === this.minZoomLevel.toPrecision(1))
-        return;
+      if (this.zoomLevel.toPrecision(1) === this.minZoomLevel.toPrecision(1)) return;
     }
 
     const prevZoomLevel = this.zoomLevel;
@@ -260,18 +264,11 @@ class ClickHandler {
     this.minX = this.rootContainer.width - this.mapContainer.width;
     this.minY = this.rootContainer.height - this.mapContainer.height;
 
-    console.log("minX", this.minX);
-    console.log("rootContainer", this.rootContainer.width);
-    console.log(
-      "rootContainer pos",
-      this.rootContainer.x,
-      this.rootContainer.y,
-    );
-    console.log("mapContainer", this.mapContainer.width);
+    console.log('minX', this.minX);
+    console.log('rootContainer', this.rootContainer.width);
+    console.log('rootContainer pos', this.rootContainer.x, this.rootContainer.y);
+    console.log('mapContainer', this.mapContainer.width);
 
-    this.moveMap.bind(this)(
-      this.mapContainer.x + offsetX,
-      this.mapContainer.y + offsetY,
-    );
+    this.moveMap.bind(this)(this.mapContainer.x + offsetX, this.mapContainer.y + offsetY);
   }
 }

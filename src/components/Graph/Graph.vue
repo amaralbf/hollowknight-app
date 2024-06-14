@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { Ref, ref } from "vue";
-import Search from "./Search.vue";
-import CyGraph from "./CyGraph/CyGraph.vue";
-import PreviousPath from "./PreviousPath.vue";
-import Progression from "./Progression.vue";
+import { type Ref, ref } from 'vue';
+import Search from './Search.vue';
+import CyGraph from './CyGraph/CyGraph.vue';
+import PreviousPath from './PreviousPath.vue';
+import Progression from './Progression.vue';
 
-const searchText: Ref<string> = ref("");
+const searchText: Ref<string> = ref('');
 const isPreviousPathChecked: Ref<boolean> = ref(false);
 const progressionChecked: Ref<boolean> = ref(false);
 const nextOnly: Ref<boolean> = ref(false);
@@ -34,11 +34,7 @@ const updateNextOnly = (checkValue: boolean) => {
 <template>
   <div>
     <div class="filters">
-      <Search
-        :searchText="searchText"
-        @search-input="updateSearchText"
-        class="filter"
-      />
+      <Search :searchText="searchText" @search-input="updateSearchText" class="filter" />
       <PreviousPath
         :isPreviousPathChecked="isPreviousPathChecked"
         @toggle-previous-path="updateHighlightPreviousPath"

@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, watch } from "vue";
-import { buildGraph, zoomInOnNode } from "./graph";
+import { onMounted, onBeforeUnmount, watch } from 'vue';
+import { buildGraph, zoomInOnNode } from './graph';
 import {
   initProgression,
   loadProgression,
   setProgressionStatus,
   toggleNextOnly,
-} from "./progression";
-import cytoscape from "cytoscape";
+} from './progression';
+import cytoscape from 'cytoscape';
 
 const props = defineProps({
   searchText: String,
@@ -20,12 +20,7 @@ const props = defineProps({
 let cy: cytoscape.Core;
 
 const handleSearchTextChange = (newText: string) => {
-  zoomInOnNode(
-    cy,
-    newText,
-    props.isPreviousPathChecked.valueOf(),
-    props.progressionChecked,
-  );
+  zoomInOnNode(cy, newText, props.isPreviousPathChecked.valueOf(), props.progressionChecked);
 };
 
 const handlePreviousPathChange = (isChecked: boolean) => {

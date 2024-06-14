@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue';
 
 const props = defineProps({
   isPreviousPathChecked: Boolean,
 });
 
-const emit = defineEmits(["toggle-previous-path"]);
+const emit = defineEmits(['toggle-previous-path']);
 
 const isPreviousPathChecked = ref(props.isPreviousPathChecked);
 
 const emitHighlightPreviousPath = (event: any) => {
-  emit("toggle-previous-path", event.target.checked);
+  emit('toggle-previous-path', event.target.checked);
 };
 </script>
 
@@ -29,9 +29,6 @@ const emitHighlightPreviousPath = (event: any) => {
 </template>
 
 <style>
-.highlight-previous-path-div {
-}
-
 .highlight-previous-path-div label {
   vertical-align: middle;
 }

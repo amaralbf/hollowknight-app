@@ -1,27 +1,23 @@
-import cytoscape, {
-  ElementDefinition,
-  EventObject,
-  Stylesheet,
-} from "cytoscape";
-import klay from "cytoscape-klay";
+import cytoscape, { type ElementDefinition, type EventObject, type Stylesheet } from 'cytoscape';
+import klay from 'cytoscape-klay';
 import {
   elements,
-  GraphJsonElement,
-  JsonDependency,
-  JsonMultiplePathsDependencies,
-  JsonObjectDependency,
-  JsonDependencies,
-} from "../../../composables/elements";
-import { searchPaths } from "./pathSearch";
-import { clickOnNode } from "./progression";
+  type GraphJsonElement,
+  type JsonDependency,
+  type JsonMultiplePathsDependencies,
+  type JsonObjectDependency,
+  type JsonDependencies,
+} from '../../../services/ElementService';
+import { searchPaths } from './pathSearch';
+import { clickOnNode } from './progression';
 
 cytoscape.use(klay);
 
-const IMAGE_DIR = "images";
+const IMAGE_DIR = 'images';
 
-let uniqueOrNodesIds = new Map();
+const uniqueOrNodesIds = new Map();
 
-var graph: Graph;
+let graph: Graph;
 
 class GraphElement {
   id: string;
@@ -39,7 +35,7 @@ class GraphElement {
     this.type = elem.type;
     this.location = elem.location;
     this.imgUrl = `${IMAGE_DIR}/${elem.img}`;
-    this.classes = elem?.classes ?? "";
+    this.classes = elem?.classes ?? '';
   }
 
   getCyNode(): ElementDefinition {
@@ -56,7 +52,7 @@ class GraphElement {
     return {
       selector: `#${this.id}`,
       style: {
-        "background-image": `url('${this.imgUrl}')`,
+        'background-image': `url('${this.imgUrl}')`,
       },
     };
   }
@@ -76,18 +72,15 @@ function stringDependency(source: string, target: string): ElementDefinition {
   };
 }
 
-function objectDependency(
-  source: JsonObjectDependency,
-  target: string,
-): ElementDefinition {
+function objectDependency(source: JsonObjectDependency, target: string): ElementDefinition {
   return {
     data: {
       id: `${source.id}->${target}`,
       source: source.id,
       target: target,
-      label: source.label ?? "",
+      label: source.label ?? '',
     },
-    classes: source.classes ?? "",
+    classes: source.classes ?? '',
   };
 }
 
@@ -96,14 +89,14 @@ function addOrClassesToEdges(
   pathIndex: number,
 ): Array<JsonDependency> {
   return path.map((edge) => {
-    if (typeof edge === "string") {
+    if (typeof edge === 'string') {
       return {
         id: edge,
         classes: `or_${pathIndex}`,
       };
     }
-    let newEdge = structuredClone(edge);
-    if ("classes" in edge) {
+    const newEdge = structuredClone(edge);
+    if ('classes' in edge) {
       newEdge.classes = `${edge.classes} or_${pathIndex}`;
     } else {
       newEdge.classes = `or_${pathIndex}`;
@@ -122,8 +115,8 @@ function calculateDependencies(
       return [];
     }
 
-    let deps = dependencies.map((dep) => {
-      if (typeof dep === "string") {
+    const deps = dependencies.map((dep) => {
+      if (typeof dep === 'string') {
         // console.log("string dep: ", dep);
         return [stringDependency(dep, target_id)];
       } else {
@@ -139,7 +132,7 @@ function calculateDependencies(
 }
 
 function getOrNodeId(pathDependencies: Array<Array<JsonDependency>>) {
-  let key = JSON.stringify(pathDependencies);
+  const key = JSON.stringify(pathDependencies);
   let orNodeId = uniqueOrNodesIds.get(key);
 
   if (orNodeId) {
@@ -156,15 +149,15 @@ function calculateMultiplePaths(
 ): Array<ElementDefinition> {
   const { orNodeId, createEdges } = getOrNodeId(dependencies.paths);
 
-  let orNode = {
+  const orNode = {
     data: {
       id: orNodeId,
-      name: "",
+      name: '',
     },
-    classes: "or",
+    classes: 'or',
   };
 
-  let orNodeToTarget = {
+  const orNodeToTarget = {
     data: {
       id: `${orNodeId}->${target}`,
       source: orNodeId,
@@ -172,23 +165,18 @@ function calculateMultiplePaths(
     },
   };
 
-  var pathEdgesToOrNodeSpread: Array<ElementDefinition> = [];
+  let pathEdgesToOrNodeSpread: Array<ElementDefinition> = [];
   if (createEdges) {
-    let pathEdgesToOrNode = dependencies.paths.map((path, i) => {
-      let pathWithOrClasses = addOrClassesToEdges(path, i);
+    const pathEdgesToOrNode = dependencies.paths.map((path, i) => {
+      const pathWithOrClasses = addOrClassesToEdges(path, i);
       return calculateDependencies(pathWithOrClasses, orNodeId);
     });
     pathEdgesToOrNodeSpread = pathEdgesToOrNode.reduce((a, b) => [...a, ...b]);
   }
 
-  let commonEdgesToTarget = calculateDependencies(dependencies.common, target);
+  const commonEdgesToTarget = calculateDependencies(dependencies.common, target);
 
-  return [
-    orNode,
-    orNodeToTarget,
-    ...pathEdgesToOrNodeSpread,
-    ...commonEdgesToTarget,
-  ];
+  return [orNode, orNodeToTarget, ...pathEdgesToOrNodeSpread, ...commonEdgesToTarget];
 }
 
 class Graph {
@@ -205,144 +193,142 @@ class Graph {
   }
 
   calculateElements(): Array<cytoscape.ElementDefinition> {
-    let elements = this.nodes.map((node) => {
+    const elements = this.nodes.map((node) => {
       return [node.getCyNode(), ...node.getCyEdges(), ...node.dependencies];
     });
     return elements.reduce((node1, node2) => [...node1, ...node2]);
   }
 
   calculateNodeStyles(): Array<cytoscape.Stylesheet> {
-    let nodeSelector: Stylesheet = {
-      selector: "node",
+    const nodeSelector: Stylesheet = {
+      selector: 'node',
       style: {
-        "background-opacity": 0,
-        "background-fit": "contain",
-        label: "data(name)",
-        "text-wrap": "wrap",
-        "font-size": "0.5em",
-        shape: "rectangle",
+        'background-opacity': 0,
+        'background-fit': 'contain',
+        label: 'data(name)',
+        'text-wrap': 'wrap',
+        'font-size': '0.5em',
+        shape: 'rectangle',
       },
     };
 
-    let nodeIds: Array<Stylesheet> = this.nodes.map((node) =>
-      node.getCyNodeStyle(),
-    );
+    const nodeIds: Array<Stylesheet> = this.nodes.map((node) => node.getCyNodeStyle());
     return [nodeSelector, ...nodeIds];
   }
 
   calculateEdgeStyles(): Array<cytoscape.Stylesheet> {
-    let edgeSelector = {
-      selector: "edge",
+    const edgeSelector = {
+      selector: 'edge',
       style: {
         width: 2,
-        "line-color": "#222",
-        "target-arrow-color": "#222",
-        "target-arrow-shape": "triangle",
-        "curve-style": "bezier",
-        "text-rotation": "autorotate",
-        "text-background-color": "#e9e9e9",
-        "text-background-opacity": 1,
-        "text-background-padding": "2px",
-        "font-size": "0.5em",
+        'line-color': '#222',
+        'target-arrow-color': '#222',
+        'target-arrow-shape': 'triangle',
+        'curve-style': 'bezier',
+        'text-rotation': 'autorotate',
+        'text-background-color': '#e9e9e9',
+        'text-background-opacity': 1,
+        'text-background-padding': '2px',
+        'font-size': '0.5em',
         label: function (ele: cytoscape.EdgeDataDefinition) {
-          if (ele.data("label")) {
-            return ele.data("label");
+          if (ele.data('label')) {
+            return ele.data('label');
           }
-          return "";
+          return '';
         },
       },
     };
 
-    let roundImg = {
-      selector: "node.round-img",
+    const roundImg = {
+      selector: 'node.round-img',
       style: {
-        shape: "ellipse",
-        "background-fit": "cover",
+        shape: 'ellipse',
+        'background-fit': 'cover',
       },
     };
 
-    let wideImg = {
-      selector: "node.wide-img",
+    const wideImg = {
+      selector: 'node.wide-img',
       style: {
-        shape: "rectangle",
-        width: "60px",
+        shape: 'rectangle',
+        width: '60px',
       },
     };
 
-    let extra_info = {
-      selector: "edge.extra-info",
+    const extra_info = {
+      selector: 'edge.extra-info',
       style: {
-        "line-style": "dashed",
+        'line-style': 'dashed',
       },
     };
 
-    let or_classes = [
+    const or_classes = [
       {
-        selector: "edge.or_0",
+        selector: 'edge.or_0',
         style: {
-          "line-color": "#f90",
-          "target-arrow-color": "#f90",
+          'line-color': '#f90',
+          'target-arrow-color': '#f90',
         },
       },
       {
-        selector: "edge.or_1",
+        selector: 'edge.or_1',
         style: {
-          "line-color": "#2a2",
-          "target-arrow-color": "#2a2",
+          'line-color': '#2a2',
+          'target-arrow-color': '#2a2',
         },
       },
       {
-        selector: "edge.or_2",
+        selector: 'edge.or_2',
         style: {
-          "line-color": "#22d",
-          "target-arrow-color": "#22d",
+          'line-color': '#22d',
+          'target-arrow-color': '#22d',
         },
       },
       {
-        selector: "edge.or_3",
+        selector: 'edge.or_3',
         style: {
-          "line-color": "#d0f",
-          "target-arrow-color": "#d0f",
+          'line-color': '#d0f',
+          'target-arrow-color': '#d0f',
         },
       },
       {
-        selector: "edge.or_4",
+        selector: 'edge.or_4',
         style: {
-          "line-color": "#bdbf17",
-          "target-arrow-color": "#bdbf17",
+          'line-color': '#bdbf17',
+          'target-arrow-color': '#bdbf17',
         },
       },
     ];
 
-    let or_node = {
-      selector: "node.or",
+    const or_node = {
+      selector: 'node.or',
       style: {
-        "background-image": `${IMAGE_DIR}/or.svg`,
+        'background-image': `${IMAGE_DIR}/or.svg`,
       },
     };
 
-    let marked_node = {
-      selector: "node.marked",
+    const marked_node = {
+      selector: 'node.marked',
       style: {
-        "border-width": "2.5px",
-        "border-style": "solid",
-        "border-color": "#050",
-        "background-image-opacity": 0.2,
-        color: "#050",
+        'border-width': '2.5px',
+        'border-style': 'solid',
+        'border-color': '#050',
+        'background-image-opacity': 0.2,
+        color: '#050',
       },
     };
 
-    let unmarked_node = {
-      selector: ".unmarked",
+    const unmarked_node = {
+      selector: '.unmarked',
       style: {
         opacity: 0.5,
       },
     };
 
-    let available_to_mark = {
-      selector: "node.available-to-mark",
+    const available_to_mark = {
+      selector: 'node.available-to-mark',
       style: {
-        "font-weight": "bold",
+        'font-weight': 'bold',
         // "border-width": "2.5px",
         // "border-style": "solid",
         // "border-color": "#050",
@@ -350,49 +336,55 @@ class Graph {
       },
     };
 
-    let not_edge = {
-      selector: "edge.not",
+    const not_edge = {
+      selector: 'edge.not',
       style: {
-        "line-style": "dotted",
-        "line-color": "#f00",
-        "target-arrow-color": "#f00",
-        color: "#f00",
-        label: "PRECLUDES",
+        'line-style': 'dotted',
+        'line-color': '#f00',
+        'target-arrow-color': '#f00',
+        color: '#f00',
+        label: 'PRECLUDES',
       },
     };
 
-    let low_opacity = {
-      selector: ".low-opacity",
+    const low_opacity = {
+      selector: '.low-opacity',
       style: {
         opacity: 0.3,
       },
     };
 
-    let hidden = {
-      selector: ".hidden",
+    const hidden = {
+      selector: '.hidden',
       style: {
-        display: "none",
+        display: 'none',
       },
     };
 
-    let auto_rotate = {
-      selector: ".autorotate", // Class to apply automatic rotation
+    const auto_rotate = {
+      selector: '.autorotate', // Class to apply automatic rotation
       style: {
-        "text-rotation": "data(angle)", // Rotates the label based on the 'angle' data property
+        'text-rotation': 'data(angle)', // Rotates the label based on the 'angle' data property
       },
     };
 
     return [
+      //@ts-expect-error
       edgeSelector,
+      //@ts-expect-error
       roundImg,
       wideImg,
+      //@ts-expect-error
       extra_info,
       low_opacity,
+      //@ts-expect-error
       hidden,
+      //@ts-expect-error
       auto_rotate,
       or_node,
       marked_node,
       unmarked_node,
+      //@ts-expect-error
       available_to_mark,
       ...or_classes,
       not_edge,
@@ -400,8 +392,8 @@ class Graph {
   }
 
   calculateStyle(): Array<cytoscape.Stylesheet> {
-    let nodeStyles = this.calculateNodeStyles();
-    let edgeStyles = this.calculateEdgeStyles();
+    const nodeStyles = this.calculateNodeStyles();
+    const edgeStyles = this.calculateEdgeStyles();
 
     return [...nodeStyles, ...edgeStyles];
   }
@@ -410,25 +402,25 @@ class Graph {
 export function buildGraph(): cytoscape.Core {
   graph = new Graph(elements);
 
-  let cy = cytoscape({
-    container: document.getElementById("cy"),
+  const cy = cytoscape({
+    container: document.getElementById('cy'),
     elements: graph.calculateElements(),
     style: graph.calculateStyle(),
     layout: {
-      name: "klay",
+      name: 'klay',
       // @ts-ignore
       nodeDimensionsIncludeLabels: true,
     },
   });
 
-  cy.nodes().on("click", (e: EventObject) => clickOnNode(e.target.id()));
+  cy.nodes().on('click', (e: EventObject) => clickOnNode(e.target.id()));
 
   return cy;
 }
 
 function fitScreenToAllElements(cy: cytoscape.Core) {
   // @ts-ignore
-  cy.animate({ fit: { eles: cy.$(""), padding: 20, animate: true } });
+  cy.animate({ fit: { eles: cy.$(''), padding: 20, animate: true } });
 }
 
 function resetAnimation(cy: cytoscape.Core, isPreviousPathChecked: boolean) {
@@ -436,24 +428,20 @@ function resetAnimation(cy: cytoscape.Core, isPreviousPathChecked: boolean) {
     cy.remove(cy.elements());
     cy.add(graph.elements);
     cy.layout({
-      name: "klay",
+      name: 'klay',
       // @ts-ignore
       nodeDimensionsIncludeLabels: true,
       fit: true,
     }).run();
   } else {
-    cy.$(".low-opacity").removeClass("low-opacity");
+    cy.$('.low-opacity').removeClass('low-opacity');
   }
   fitScreenToAllElements(cy);
 }
 
 function caseInsensitiveNodeFilter(queryText: string) {
   return function (ele: any) {
-    return ele
-      .data("name")
-      .toLowerCase()
-      .replace("\n", " ")
-      .includes(queryText);
+    return ele.data('name').toLowerCase().replace('\n', ' ').includes(queryText);
   };
 }
 
@@ -465,41 +453,40 @@ export function zoomInOnNode(
 ) {
   if (queryText.length < 3) {
     resetAnimation(cy, isPreviousPathChecked);
-    console.log("Query text smaller than 3 chars");
+    console.log('Query text smaller than 3 chars');
     return;
   }
 
+  let eles;
   if (queryText[0] === '"' && queryText[queryText.length - 1] === '"') {
-    var eles = cy.$(`#${queryText.substring(1, queryText.length - 1)}`);
+    eles = cy.$(`#${queryText.substring(1, queryText.length - 1)}`);
   } else {
     if (isPreviousPathChecked) {
-      console.log("Is this run?");
+      console.log('Is this run?');
       cy.remove(cy.elements());
       cy.add(graph.elements);
     }
-    eles = cy
-      .nodes()
-      .filter(caseInsensitiveNodeFilter(queryText.toLowerCase()));
+    eles = cy.nodes().filter(caseInsensitiveNodeFilter(queryText.toLowerCase()));
   }
 
   if (eles.length == 0) {
     resetAnimation(cy, isPreviousPathChecked);
-    console.log("No node found");
+    console.log('No node found');
     return;
   }
 
-  let padding = eles.length > 1 ? 0 : 300;
+  const padding = eles.length > 1 ? 0 : 300;
 
   if (isPreviousPathChecked) {
     if (eles.length > 0) {
-      let pathEles = eles.predecessors().union(eles);
+      const pathEles = eles.predecessors().union(eles);
       cy.remove(cy.elements());
       cy.add(pathEles);
     } else {
-      let pathEles = eles.predecessors().union(eles);
+      const pathEles = eles.predecessors().union(eles);
       cy.remove(cy.elements());
       cy.add(pathEles);
-      let paths = searchPaths(cy, eles[0]);
+      const paths = searchPaths(cy, eles[0]);
       let final_path = cy.collection();
       paths.forEach((path) => {
         final_path = final_path.union(path[0]);
@@ -509,8 +496,8 @@ export function zoomInOnNode(
       cy.add(final_path);
     }
 
-    var layout = cy.layout({
-      name: "klay",
+    const layout = cy.layout({
+      name: 'klay',
       // @ts-ignore
       nodeDimensionsIncludeLabels: true,
       fit: true,
@@ -525,11 +512,11 @@ export function zoomInOnNode(
         padding: padding,
       },
       duration: 500,
-      easing: "ease-out",
+      easing: 'ease-out',
     });
 
     if (!progressionChecked) {
-      cy.elements().addClass("low-opacity");
+      cy.elements().addClass('low-opacity');
 
       // searched nodes
       let selected = eles;
@@ -540,7 +527,7 @@ export function zoomInOnNode(
         selected = selected.union(`edge[target="${ele.id()}"]`);
       });
 
-      selected.removeClass("low-opacity");
+      selected.removeClass('low-opacity');
     }
   }
 }

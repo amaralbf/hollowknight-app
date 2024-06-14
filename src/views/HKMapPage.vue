@@ -1,10 +1,12 @@
+<script setup lang="ts">
+import HKMap from '@/components/HKMap.vue';
+</script>
+
 <template>
   <div class="map-page-div">
     <HKMap />
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style>
 .map-page-div {

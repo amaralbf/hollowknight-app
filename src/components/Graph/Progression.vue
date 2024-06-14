@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { downloadProgression } from "./CyGraph/progression";
+import { ref } from 'vue';
+import { downloadProgression } from './CyGraph/progression';
 
 const props = defineProps({
   progressionChecked: Boolean,
@@ -8,18 +8,14 @@ const props = defineProps({
   progressionFile: String,
 });
 
-const emit = defineEmits([
-  "toggle-progression",
-  "toggle-next-only",
-  "progression-file-load",
-]);
+const emit = defineEmits(['toggle-progression', 'toggle-next-only', 'progression-file-load']);
 
 const progressionChecked = ref(props.progressionChecked);
 const nextOnly = ref(props.nextOnly);
 const progressionFile = ref(props.progressionFile);
 
 const emitProgressionToggle = (event: any) => {
-  emit("toggle-progression", event.target.checked);
+  emit('toggle-progression', event.target.checked);
 };
 
 const handleDownloadClick = () => {
@@ -29,9 +25,9 @@ const handleDownloadClick = () => {
 };
 
 const openFilePicker = () => {
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = ".json"; // specify accepted file types if needed
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json'; // specify accepted file types if needed
   input.onchange = (event) => {
     //@ts-expect-error
     const file = event.target?.files?.[0];
@@ -47,15 +43,15 @@ const readFileContent = (file: File) => {
   reader.onload = (e) => {
     if (e.target) {
       progressionFile.value = e.target.result as string;
-      emit("progression-file-load", progressionFile.value);
+      emit('progression-file-load', progressionFile.value);
     }
   };
   reader.readAsText(file);
 };
 
 const emitNextOnlyToggle = (event: any) => {
-  console.log("Emit toggle-next-only", event.target.checked);
-  emit("toggle-next-only", event.target.checked);
+  console.log('Emit toggle-next-only', event.target.checked);
+  emit('toggle-next-only', event.target.checked);
 };
 </script>
 

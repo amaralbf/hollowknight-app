@@ -1,38 +1,36 @@
-import cytoscape, { Collection, NodeSingular } from "cytoscape";
+import cytoscape, { type Collection, type NodeSingular } from 'cytoscape';
 
 export const searchPaths = (cy: cytoscape.Core, targetNode: NodeSingular) => {
-  let visitedEdges: Array<NodeSingular> = [];
+  const visitedEdges: Array<NodeSingular> = [];
   let orNodes: Set<NodeSingular> = new Set();
-  let level = 1;
-  let paths: Array<Array<Collection>> = [
+  const level = 1;
+  const paths: Array<Array<Collection>> = [
     [targetNode.union(visit(cy, targetNode, orNodes, visitedEdges, level))],
   ];
 
-  let orNodeOrder = ["target"];
+  const orNodeOrder = ['target'];
 
   while (orNodes.size > 0) {
-    console.log("Starting search for new paths from orNodes:");
-    let orNodesStr = "{";
-    for (let orNode of orNodes) {
-      let orTarget = orNode.outgoers("node")[0].id();
+    console.log('Starting search for new paths from orNodes:');
+    let orNodesStr = '{';
+    for (const orNode of orNodes) {
+      const orTarget = orNode.outgoers('node')[0].id();
       orNodesStr += `or_node->${orTarget},`;
     }
-    orNodesStr += "}";
+    orNodesStr += '}';
     console.log(orNodesStr);
-    let newOrNodes: Set<NodeSingular> = new Set();
+    const newOrNodes: Set<NodeSingular> = new Set();
 
     for (const node of orNodes) {
-      console.log(
-        `Visiting orNode: ${node.id()} (${node.outgoers("edge")[0].id()})`,
-      );
-      orNodeOrder.push(node.outgoers("edge")[0].id());
-      let orPaths = visitOrNode(cy, node, newOrNodes, visitedEdges, level + 1);
+      console.log(`Visiting orNode: ${node.id()} (${node.outgoers('edge')[0].id()})`);
+      orNodeOrder.push(node.outgoers('edge')[0].id());
+      const orPaths = visitOrNode(cy, node, newOrNodes, visitedEdges, level + 1);
       paths.push(orPaths);
     }
     orNodes = newOrNodes;
   }
 
-  console.log("orNodeOrder", orNodeOrder);
+  console.log('orNodeOrder', orNodeOrder);
   return paths;
 };
 
@@ -43,18 +41,18 @@ const visit = (
   visitedEdges: Array<NodeSingular>,
   level: number,
 ): Collection => {
-  let orNodesStr = "{";
-  for (let orNode of orNodes) {
+  let orNodesStr = '{';
+  for (const orNode of orNodes) {
     orNodesStr += `${orNode.id()},`;
   }
-  orNodesStr += "}";
-  console.log("    ".repeat(level) + `visit(cy, ${node.id()}, ${orNodesStr})`);
+  orNodesStr += '}';
+  console.log('    '.repeat(level) + `visit(cy, ${node.id()}, ${orNodesStr})`);
 
   let path = cy.collection();
-  let edges = node.incomers("edge");
+  const edges = node.incomers('edge');
 
   edges.forEach((edge) => {
-    let incomingNode = edge.source();
+    const incomingNode = edge.source();
 
     if (visitedEdges.indexOf(edge) == -1) {
       visitedEdges.push(edge);
@@ -62,9 +60,7 @@ const visit = (
         orNodes.add(incomingNode);
       } else {
         path = path.union(edge).union(incomingNode);
-        path = path.union(
-          visit(cy, incomingNode, orNodes, visitedEdges, level + 1),
-        );
+        path = path.union(visit(cy, incomingNode, orNodes, visitedEdges, level + 1));
       }
     }
   });
@@ -79,16 +75,16 @@ const visitOrNode = (
   visitedEdges: Array<NodeSingular>,
   level: number,
 ) => {
-  let paths: Array<Collection> = [];
-  let edges = node.incomers("edge");
+  const paths: Array<Collection> = [];
+  const edges = node.incomers('edge');
 
   edges.forEach((edge) => {
-    let incomingNode = edge.source();
+    const incomingNode = edge.source();
 
     if (visitedEdges.indexOf(edge) == -1) {
       visitedEdges.push(edge);
-      let orOutgoingEdge = node.outgoers("edge")[0];
-      let path = node
+      const orOutgoingEdge = node.outgoers('edge')[0];
+      const path = node
         .union(edge)
         .union(incomingNode)
         .union(orOutgoingEdge)
@@ -101,5 +97,5 @@ const visitOrNode = (
 };
 
 const isOrNode = (node: NodeSingular): boolean => {
-  return node.id().startsWith("or_node_");
+  return node.id().startsWith('or_node_');
 };

@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue';
 
 const drawer = ref(false);
 
 const navItems = [
-  { title: "Interactive Map", link: "/", name: "map" },
-  { title: "Graph", link: "/graph", name: "graph" },
+  { title: 'Interactive Map', link: '/', name: 'map' },
+  { title: 'Graph', link: '/graph', name: 'graph' },
 ];
 </script>
 
@@ -33,14 +33,7 @@ const navItems = [
         </v-col>
       </v-row>
     </v-container>
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      temporary
-      right
-      dark
-      color="primary"
-    >
+    <v-navigation-drawer v-model="drawer" app temporary right dark color="primary">
       <v-list dense>
         <v-list-item v-for="item in navItems" :key="item.title" :to="item.link">
           <v-list-item-title>{{ item.title }}</v-list-item-title>

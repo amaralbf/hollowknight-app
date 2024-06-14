@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted } from 'vue';
 
-import { initCanvas } from "./app";
+import initCanvas from '@/services/HKMap/app';
 
-const emit = defineEmits(["element-click"]);
+const emit = defineEmits(['element-click']);
 
 const emitElementClick = (element: any) => {
   console.log('Emitting "element-click"');
-  emit("element-click", element);
+  emit('element-click', element);
 };
 
 onMounted(() => {

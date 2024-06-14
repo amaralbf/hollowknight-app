@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Graph from '@/components/Graph/Graph.vue';
+</script>
 
 <template><Graph /></template>
 
