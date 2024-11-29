@@ -7,13 +7,12 @@ import {
   type JsonMultiplePathsDependencies,
   type JsonObjectDependency,
   type JsonDependencies,
-} from '../../../services/ElementService';
+} from '@map/old_elements';
+
 import { searchPaths } from './pathSearch';
 import { clickOnNode } from './progression';
 
 cytoscape.use(klay);
-
-const IMAGE_DIR = 'images';
 
 const uniqueOrNodesIds = new Map();
 
@@ -34,7 +33,7 @@ class GraphElement {
     this.dependencies = calculateDependencies(elem.depends_on, elem.id);
     this.type = elem.type;
     this.location = elem.location;
-    this.imgUrl = `${IMAGE_DIR}/${elem.img}`;
+    this.imgUrl = elem.img;
     this.classes = elem?.classes ?? '';
   }
 
@@ -303,7 +302,7 @@ class Graph {
     const or_node = {
       selector: 'node.or',
       style: {
-        'background-image': `${IMAGE_DIR}/or.svg`,
+        'background-image': 'images/or.svg',
       },
     };
 

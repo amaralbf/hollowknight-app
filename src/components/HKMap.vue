@@ -6,7 +6,6 @@ import initCanvas from '@/services/HKMap/app';
 const emit = defineEmits(['element-click']);
 
 const emitElementClick = (element: any) => {
-  console.log('Emitting "element-click"');
   emit('element-click', element);
 };
 

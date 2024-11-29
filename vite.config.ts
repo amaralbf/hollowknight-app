@@ -27,6 +27,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@map': fileURLToPath(new URL('./src/services/HKMap', import.meta.url)),
+      '@elements': fileURLToPath(new URL('./src/services/Elements', import.meta.url)),
     },
   },
 });
