@@ -1,6 +1,8 @@
 import * as PIXI from 'pixi.js';
 import MapApp from '@map/mapApp';
 import { ClickHandler } from '@map/events';
+import { elements } from '@elements/data';
+import { Graph } from '@elements/graph/graph';
 
 const iconScale = 0.7;
 
@@ -11,8 +13,14 @@ const initCanvas = async (emitElementClick: CallableFunction) => {
   const clickHandler = new ClickHandler(app, emitElementClick);
   clickHandler.addListeners();
 
-  const charm = await createCharm('fury_of_the_fallen', 1721, 654);
-  app.add(charm);
+  const graph = new Graph(elements);
+  console.log('Created Graph');
+  const startingElements = graph.getAvailableElements();
+
+  // app.draw(startingElements)
+
+  // const charm = await createCharm('fury_of_the_fallen', 1721, 654);
+  // app.add(charm);
 };
 
 const createCharm = async (id: string, x: number, y: number) => {

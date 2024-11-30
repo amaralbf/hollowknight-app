@@ -11,6 +11,7 @@
       "@/*": ["./src/*"],
       "@map/*": ["./src/services/HKMap/*"],
       "@elements/*": ["./src/services/Elements/*"]
-    }
+    },
+    "sourceMap": true
   }
 }
