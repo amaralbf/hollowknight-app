@@ -18,6 +18,7 @@ export class GraphElement {
   location: string;
   imgUrl: string;
   classes: string;
+  pos: number[];
 
   constructor(elem: GraphJsonElement) {
     this.id = elem.id;
@@ -27,6 +28,7 @@ export class GraphElement {
     this.location = elem.location;
     this.imgUrl = elem.img;
     this.classes = elem?.classes ?? '';
+    this.pos = elem?.pos ?? [];
   }
 
   getCyNode(): ElementDefinition {
@@ -34,6 +36,8 @@ export class GraphElement {
       data: {
         id: this.id,
         name: this.name,
+        imgUrl: this.imgUrl,
+        pos: this.pos,
       },
       classes: this.classes,
     };

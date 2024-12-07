@@ -3,6 +3,7 @@ import MapApp from '@map/mapApp';
 import { ClickHandler } from '@map/events';
 import { elements } from '@elements/data';
 import { Graph } from '@elements/graph/graph';
+import { print } from '@elements/graph/utils';
 
 const iconScale = 0.7;
 
@@ -17,7 +18,15 @@ const initCanvas = async (emitElementClick: CallableFunction) => {
   console.log('Created Graph');
   const startingElements = graph.getAvailableElements();
 
-  // app.draw(startingElements)
+  // console.log('All elements');
+  // console.log(graph.cy.nodes().length);
+  // print(graph.cy.nodes(), 'id');
+
+  // console.log('startingElements');
+  // console.log(startingElements.length);
+  // print(startingElements, 'id');
+
+  await app.draw(startingElements);
 
   // const charm = await createCharm('fury_of_the_fallen', 1721, 654);
   // app.add(charm);

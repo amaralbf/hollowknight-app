@@ -4,14 +4,16 @@ import { GraphElement } from './element';
 
 export class Graph {
   cy: cytoscape.Core;
-  elements: Array<GraphJsonElement>;
+  elements: GraphJsonElement[];
+  cyElements: cytoscape.ElementDefinition[];
 
   constructor(elements: Array<GraphJsonElement>) {
+    this.elements = elements;
+    this.cyElements = this.makeCyElements(elements);
     this.cy = cytoscape({
       headless: true,
-      elements: this.makeCyElements(elements),
+      elements: this.cyElements,
     });
-    this.elements = elements;
   }
 
   makeCyElements(elements: Array<GraphJsonElement>) {
@@ -22,11 +24,6 @@ export class Graph {
   }
 
   getAvailableElements() {
-    this.cy
-      .nodes()
-      .filter((node) => node.indegree(false) === 0)
-      .forEach((node) => {
-        console.log('node', node.data().id);
-      });
+    return this.cy.nodes().filter((node) => node.indegree(false) === 0);
   }
 }
