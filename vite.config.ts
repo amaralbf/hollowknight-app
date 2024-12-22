@@ -28,6 +28,7 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@images': fileURLToPath(new URL('./src/assets/images', import.meta.url)),
+      '@pins': fileURLToPath(new URL('./src/assets/images/pins', import.meta.url)),
       '@map': fileURLToPath(new URL('./src/services/HKMap', import.meta.url)),
       '@elements': fileURLToPath(new URL('./src/services/Elements', import.meta.url)),
     },

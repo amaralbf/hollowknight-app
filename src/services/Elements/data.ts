@@ -101,6 +101,7 @@ export const graph_content_misc: GraphJsonElement[] = [
     location: 'Forgotten Crossroads',
     img: new URL('@images/cornifer.png', import.meta.url).href,
     classes: 'wide-img',
+    pos: [1995, 865],
   },
   {
     id: 'iseldas_shop',
@@ -165,8 +166,9 @@ export const graph_content_misc: GraphJsonElement[] = [
     depends_on: [],
     type: 'Boss',
     location: 'Forgotten Crossroads',
-    img: new URL('@images/false_knight.png', import.meta.url).href,
+    img: new URL('@pins/false_knight.png', import.meta.url).href,
     classes: 'wide-img',
+    pos: [2130, 838],
   },
   {
     id: 'rescue_sly',
@@ -187,6 +189,7 @@ export const graph_content_misc: GraphJsonElement[] = [
     type: 'Boss',
     location: 'Forgotten Crossroads',
     img: new URL('@images/gruz_mother.png', import.meta.url).href,
+    pos: [2600, 986],
   },
   {
     id: 'slys_shop',
@@ -393,7 +396,8 @@ export const graph_content_misc: GraphJsonElement[] = [
     depends_on: [],
     type: 'Stag Station',
     location: 'Forgotten Crossroads',
-    img: new URL('@images/last_stag.png', import.meta.url).href,
+    img: new URL('@images/pins/stag_station.png', import.meta.url).href,
+    pos: [2329, 904],
   },
   {
     id: 'stag_station_greenpath',

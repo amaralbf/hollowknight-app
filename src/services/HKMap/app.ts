@@ -5,8 +5,6 @@ import { elements } from '@elements/data';
 import { Graph } from '@elements/graph/graph';
 import { print } from '@elements/graph/utils';
 
-const iconScale = 0.7;
-
 const initCanvas = async (emitElementClick: CallableFunction) => {
   const app = await MapApp.build();
   document.getElementById('canvas-div')?.appendChild(app.canvas);
@@ -32,16 +30,16 @@ const initCanvas = async (emitElementClick: CallableFunction) => {
   // app.add(charm);
 };
 
-const createCharm = async (id: string, x: number, y: number) => {
-  const texture = await PIXI.Assets.load(`images/${id}.png`);
-  const charm = new PIXI.Sprite(texture);
+// const createCharm = async (id: string, x: number, y: number) => {
+//   const texture = await PIXI.Assets.load(`images/${id}.png`);
+//   const charm = new PIXI.Sprite(texture);
 
-  charm.anchor.set(0.5);
-  charm.x = x;
-  charm.y = y;
-  charm.scale.set(0.25 * iconScale);
+//   charm.anchor.set(0.5);
+//   charm.x = x;
+//   charm.y = y;
+//   charm.scale.set(0.25 * iconScale);
 
-  return charm;
-};
+//   return charm;
+// };
 
 export default initCanvas;

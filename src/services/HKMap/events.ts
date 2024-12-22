@@ -13,7 +13,9 @@ export class ClickHandler {
 
   zoomLevel: number;
   minZoomLevel: number;
-  zoomStep = 0.1;
+  zoomStep: number;
+  maxZoomLevel = 2.0;
+  numberOfZoomSteps = 8;
 
   emitElementClick: CallableFunction;
 
@@ -25,6 +27,7 @@ export class ClickHandler {
 
     this.minZoomLevel = app.minZoomLevel;
     this.zoomLevel = this.minZoomLevel;
+    this.zoomStep = calculateZoomStep(this.minZoomLevel, this.maxZoomLevel, this.numberOfZoomSteps);
 
     this.emitElementClick = emitElementClick;
   }
@@ -89,30 +92,35 @@ export class ClickHandler {
   }
 
   handleWheel(event: PIXI.FederatedWheelEvent) {
-    console.log('handleWheel');
     const delta = Math.sign(event.deltaY);
     const localPoint = event.global;
 
-    console.log('rootContainer', this.rootContainer.width);
-    console.log('rootContainer pos', this.rootContainer.x, this.rootContainer.y);
+    // console.log('rootContainer', this.rootContainer.width);
+    // console.log('rootContainer pos', this.rootContainer.x, this.rootContainer.y);
 
     if (delta > 0) {
-      this.zoom(localPoint, -this.zoomStep);
+      this.zoom(localPoint, 1 / this.zoomStep);
     } else {
       this.zoom(localPoint, this.zoomStep);
     }
   }
 
   zoom(point: PIXI.Point, zoomStep: number) {
-    if (zoomStep > 0) {
-      if (this.zoomLevel.toPrecision(2) === '2.5') return;
+    if (zoomStep > 1) {
+      if (Math.abs(this.zoomLevel - this.maxZoomLevel) < 0.001) return;
     } else {
-      if (this.zoomLevel.toPrecision(1) === this.minZoomLevel.toPrecision(1)) return;
+      if (Math.abs(this.zoomLevel - this.minZoomLevel) < 0.001) return;
     }
+
+    // if (zoomStep > 0) {
+    //   if (this.zoomLevel.toPrecision(2) === '2.0') return;
+    // } else {
+    //   if (this.zoomLevel.toPrecision(1) === this.minZoomLevel.toPrecision(1)) return;
+    // }
 
     const prevZoomLevel = this.zoomLevel;
 
-    this.zoomLevel += zoomStep;
+    this.zoomLevel *= zoomStep;
 
     console.log('New zoom level:', this.zoomLevel);
 
@@ -133,3 +141,7 @@ export class ClickHandler {
     this.moveMap.bind(this)(this.mapContainer.x + offsetX, this.mapContainer.y + offsetY);
   }
 }
+
+const calculateZoomStep = (minZoom: number, maxZoom: number, nSteps: number) => {
+  return Math.pow(maxZoom / minZoom, 1 / nSteps);
+};

@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import cytoscape from 'cytoscape';
 
-const iconScale = 0.7;
+const iconScale = 0.5;
 
 class MapApp {
   app: PIXI.Application<PIXI.Renderer>;
@@ -70,13 +70,14 @@ class MapApp {
         continue;
       }
       // console.log('Element data.imgUrl:', data.imgUrl);
+      console.log(data.imgUrl);
       const texture = await PIXI.Assets.load(data.imgUrl);
       const sprite = new PIXI.Sprite(texture);
 
       sprite.anchor.set(0.5);
       sprite.x = data.pos[0];
       sprite.y = data.pos[1];
-      sprite.scale.set(0.25 * iconScale);
+      sprite.scale.set(iconScale);
 
       this.mapContainer.addChild(sprite);
     }
@@ -127,8 +128,10 @@ const createMapContainer = async (): Promise<PIXI.Container> => {
 };
 
 const createMap = async () => {
-  const texture = await PIXI.Assets.load('hk_full_map.png');
+  const map_url = new URL('@images/hk_full_map.png', import.meta.url).href;
+  const texture = await PIXI.Assets.load(map_url);
   const map = PIXI.Sprite.from(texture);
+  map.alpha = 0.3;
 
   return map;
 };

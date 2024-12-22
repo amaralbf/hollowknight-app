@@ -10,6 +10,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@images/*": ["./src/assets/images/*"],
+      "@pins/*": ["./src/assets/images/pins/*"],
       "@map/*": ["./src/services/HKMap/*"],
       "@elements/*": ["./src/services/Elements/*"]
     },
