@@ -16,6 +16,7 @@
     "@mdi/font": "^7.4.47",
     "cytoscape": "^3.29.2",
     "cytoscape-klay": "^3.1.4",
+    "lodash": "^4.17.21",
     "pixi.js": "^8.1.6",
     "roboto-fontface": "^0.10.0",
     "vue": "^3.4.21",
@@ -27,6 +28,7 @@
     "@tsconfig/node20": "^20.1.4",
     "@types/cytoscape": "^3.21.3",
     "@types/cytoscape-klay": "^3.1.4",
+    "@types/lodash": "^4.17.18",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/eslint-config-prettier": "^9.0.0",
@@ -42,5 +44,6 @@
     "vite": "^5.2.8",
     "vite-plugin-vuetify": "^2.0.3",
     "vue-tsc": "^2.0.11"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

@@ -11,6 +11,7 @@
       "@/*": ["./src/*"],
       "@images/*": ["./src/assets/images/*"],
       "@pins/*": ["./src/assets/images/pins/*"],
+      "@services/*": ["./src/services/*"],
       "@map/*": ["./src/services/HKMap/*"],
       "@elements/*": ["./src/services/Elements/*"]
     },

@@ -5,7 +5,6 @@ const drawer = ref(false);
 
 const navItems = [
   { title: 'Interactive Map', link: '/', name: 'map' },
-  { title: 'Graph', link: '/graph', name: 'graph' },
 ];
 </script>
 

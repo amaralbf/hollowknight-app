@@ -2,7 +2,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import MainLayout from './layouts/MainLayout.vue';
 import HKMapPage from './views/HKMapPage.vue';
-import GraphPage from './views/GraphPage.vue';
+// import GraphPage from './views/GraphPage.vue';
 
 const routes = [
   {
@@ -10,7 +10,7 @@ const routes = [
     component: MainLayout,
     children: [
       { path: '', name: 'map', component: HKMapPage },
-      { path: 'graph', name: 'graph', component: GraphPage },
+      // { path: 'graph', name: 'graph', component: GraphPage },
     ],
   },
 ];

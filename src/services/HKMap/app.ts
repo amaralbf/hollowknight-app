@@ -1,9 +1,7 @@
 import * as PIXI from 'pixi.js';
 import MapApp from '@map/mapApp';
 import { ClickHandler } from '@map/events';
-import { elements } from '@elements/data';
-import { Graph } from '@elements/graph/graph';
-import { print } from '@elements/graph/utils';
+import { mapElements } from '@elements/data';
 
 const initCanvas = async (emitElementClick: CallableFunction) => {
   const app = await MapApp.build();
@@ -12,9 +10,9 @@ const initCanvas = async (emitElementClick: CallableFunction) => {
   const clickHandler = new ClickHandler(app, emitElementClick);
   clickHandler.addListeners();
 
-  const graph = new Graph(elements);
-  console.log('Created Graph');
-  const startingElements = graph.getAvailableElements();
+  // const graph = new Graph(elements);
+  // console.log('Created Graph');
+  // const startingElements = graph.getAvailableElements();
 
   // console.log('All elements');
   // console.log(graph.cy.nodes().length);
@@ -24,7 +22,7 @@ const initCanvas = async (emitElementClick: CallableFunction) => {
   // console.log(startingElements.length);
   // print(startingElements, 'id');
 
-  await app.draw(startingElements);
+  await app.draw(mapElements);
 
   // const charm = await createCharm('fury_of_the_fallen', 1721, 654);
   // app.add(charm);
