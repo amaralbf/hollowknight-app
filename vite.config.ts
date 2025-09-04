@@ -27,11 +27,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@images': fileURLToPath(new URL('./src/assets/images', import.meta.url)),
-      '@pins': fileURLToPath(new URL('./src/assets/images/pins', import.meta.url)),
       '@services': fileURLToPath(new URL('./src/services', import.meta.url)),
       '@map': fileURLToPath(new URL('./src/services/HKMap', import.meta.url)),
       '@elements': fileURLToPath(new URL('./src/services/Elements', import.meta.url)),
+      // assets
+      '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
+      '@charms': fileURLToPath(new URL('./src/assets/charms', import.meta.url)),
+      '@pins': fileURLToPath(new URL('./src/assets/pins', import.meta.url)),
     },
   },
 });

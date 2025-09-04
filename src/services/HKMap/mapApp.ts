@@ -122,7 +122,7 @@ const createMapContainer = async (): Promise<PIXI.Container> => {
 };
 
 const createMap = async () => {
-  const map_url = new URL('@images/hk_full_map.png', import.meta.url).href;
+  const map_url = new URL('@assets/hk_full_map.png', import.meta.url).href;
   const texture = await PIXI.Assets.load(map_url);
   const map = PIXI.Sprite.from(texture);
   map.alpha = 0.3;

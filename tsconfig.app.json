@@ -10,10 +10,13 @@
     "paths": {
       "@/*": ["./src/*"],
       "@images/*": ["./src/assets/images/*"],
-      "@pins/*": ["./src/assets/images/pins/*"],
       "@services/*": ["./src/services/*"],
       "@map/*": ["./src/services/HKMap/*"],
-      "@elements/*": ["./src/services/Elements/*"]
+      "@elements/*": ["./src/services/Elements/*"],
+      // assets
+      "@assets/*": ["./src/assets/*"],
+      "@charms/*": ["./src/assets/charms/*"],
+      "@pins/*": ["./src/assets/pins/*"]
     },
     "sourceMap": true
   }

@@ -40,22 +40,40 @@ export class MapElement extends Element {
 }
 
 export class Charm extends MapElement {
-  constructor(
-    id: string,
-    name: string,
-    requires: DependencyManagerData,
-    type: string,
-    location: string,
-    pos: number[],
-    iconUrl: string,
-  ) {
-    super(id, name, requires, type, location, pos, iconUrl);
-    this.location = location;
-    this.pos = pos;
-  }
+  // constructor(
+  //   id: string,
+  //   name: string,
+  //   requires: DependencyManagerData,
+  //   type: string,
+  //   location: string,
+  //   pos: number[],
+  //   iconUrl: string,
+  // ) {
+  //   super(id, name, requires, type, location, pos, iconUrl);
+  //   this.location = location;
+  //   this.pos = pos;
+  // }
 
-  get iconScale() {
+  get iconScale(): number {
     return 0.25;
+  }
+}
+
+export class Character extends MapElement {
+  get iconScale(): number {
+    return 0.25;
+  }
+}
+
+export class Boss extends MapElement {
+  get iconScale(): number {
+    return 0.25;
+  }
+}
+
+export class Grub extends MapElement {
+  get iconScale(): number {
+    return 0.5;
   }
 }
 
