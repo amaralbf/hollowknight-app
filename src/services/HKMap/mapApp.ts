@@ -64,8 +64,9 @@ class MapApp {
 
   async draw(elements: MapElement[]) {
     for (const elem of elements) {
-      // console.log('Element data.imgUrl:', data.imgUrl);
+      console.log(elem.id, elem.iconUrl);
       // console.log(elem.icon);
+
       const texture = await PIXI.Assets.load(elem.iconUrl);
       const sprite = new PIXI.Sprite(texture);
 

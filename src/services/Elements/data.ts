@@ -1,6 +1,6 @@
-import { MapElement, Charm, Character, Boss, Grub } from './element';
+import { MapElement, Charm, Character, Boss, Grub, Spell } from './element';
 
-const mapElementsData: MapElementData[] = [
+const kings_pass: MapElementData[] = [
   {
     id: 'fury_of_the_fallen',
     name: 'Fury of the Fallen',
@@ -10,6 +10,9 @@ const mapElementsData: MapElementData[] = [
     iconUrl: new URL('@charms/fury_of_the_fallen.png', import.meta.url).href,
     pos: [1731, 656],
   },
+];
+
+const forgottenCrossroads: MapElementData[] = [
   {
     id: 'cornifer_forgotten_crossroads',
     name: 'Cornifer\n(Forgotten Crossroads)',
@@ -18,15 +21,6 @@ const mapElementsData: MapElementData[] = [
     location: 'Forgotten Crossroads',
     iconUrl: new URL('@pins/cornifer.png', import.meta.url).href,
     pos: [1995, 865],
-  },
-  {
-    id: 'bretta',
-    name: 'Bretta',
-    requires: [],
-    type: 'Character',
-    location: 'Forgotten Crossroads',
-    iconUrl: new URL('@pins/bretta.png', import.meta.url).href,
-    pos: [2010, 865],
   },
   {
     id: 'grubfather',
@@ -40,7 +34,9 @@ const mapElementsData: MapElementData[] = [
   {
     id: 'brooding_mawlek',
     name: 'Brooding Mawlek',
-    requires: [],
+    requires: {
+      paths: [['mantis_claw'], [{ id: 'pogo', type: 'skip', description: 'Pogo vengefly' }]],
+    },
     type: 'Boss',
     location: 'Forgotten Crossroads',
     iconUrl: new URL('@pins/brooding_mawlek.png', import.meta.url).href,
@@ -85,11 +81,72 @@ const mapElementsData: MapElementData[] = [
   {
     id: 'grub_5',
     name: 'Grub #5',
-    requires: [],
+    requires: {
+      paths: [['mothwing_cloak'], [{ id: 'pogo', type: 'skip', description: 'Pogo vengefly' }]],
+      common: [],
+    },
     type: 'Grub',
     location: 'Forgotten Crossroads',
     iconUrl: new URL('@pins/grub.png', import.meta.url).href,
     pos: [2115, 756],
+  },
+  {
+    id: 'false_knight',
+    name: 'False Knight',
+    requires: [],
+    type: 'Boss',
+    location: 'Forgotten Crossroads',
+    iconUrl: new URL('@pins/false_knight.png', import.meta.url).href,
+    pos: [2141, 850],
+  },
+  {
+    id: 'gruz_mother',
+    name: 'Gruz Mother',
+    requires: [],
+    type: 'Boss',
+    location: 'Forgotten Crossroads',
+    iconUrl: new URL('@pins/gruz_mother.png', import.meta.url).href,
+    pos: [2603, 987],
+  },
+  {
+    id: 'soul_catcher',
+    name: 'Soul Catcher',
+    requires: [],
+    type: 'Charm',
+    location: 'Forgotten Crossroads',
+    iconUrl: new URL('@charms/soul_catcher.png', import.meta.url).href,
+    pos: [2038, 822],
+  },
+  {
+    id: 'vengeful_spirit',
+    name: 'Vengeful Spirit',
+    requires: [],
+    type: 'Spell',
+    location: 'Forgotten Crossroads',
+    iconUrl: new URL('@images/vengeful_spirit.png', import.meta.url).href,
+    iconScale: 0.35,
+    pos: [2070, 822],
+  },
+  // {
+  //   id: 'salubra',
+  //   name: 'Salubra',
+  //   requires: [],
+  //   type: 'Character',
+  //   location: 'Forgotten Crossroads',
+  //   iconUrl: new URL('@pins/salubra.png', import.meta.url).href,
+  //   pos: [2674, 1011],
+  // },
+  {
+    id: 'rescue_sly',
+    name: 'Sly (Infected)',
+    requires: {
+      paths: [['gruz_mother'], ['resting_grounds_lower'], ['dream_nail', 'desolate_dive']],
+      common: [],
+    },
+    type: 'Character',
+    location: 'Forgotten Crossroads',
+    iconUrl: new URL('@pins/sly_infected.png', import.meta.url).href,
+    pos: [2607, 1028],
   },
 ];
 
@@ -98,31 +155,35 @@ const mapElementsData: MapElementData[] = [
 export type MapElementData = {
   id: string;
   name: string;
-  requires: DependencyManagerData;
+  requires: DependencySet;
   type: string;
   iconUrl: string;
-  classes?: string;
+  iconScale?: number;
   location: string;
   pos: number[];
 };
 
-export type DependencyManagerData = DependencyData[]; // | MultiplePathsDependency;
+export type SimpleDependency = string;
+export type QuantityDependency = { id: string; type: string; quantity: number };
+export type SkipDependency = { id: string; type: string; description: string };
+export type NegativeDependency = { id: string; type: string };
 
-export type DependencyData = string; // | DependencyWithAttributes;
+export type SingularDependency =
+  | SimpleDependency
+  | QuantityDependency
+  | SkipDependency
+  | NegativeDependency;
 
-// export type MultiplePathsDependency = {
-//   paths: DependencyData[][];
-//   common?: DependencyData[];
-// };
+export type MultipleDependencySet = SingularDependency[];
 
-// export type DependencyWithAttributes = {
-//   id: string;
-//   classes?: string;
-//   label?: string;
-// };
+export type MultiplePathsDependencySet = {
+  paths: MultipleDependencySet[];
+  common?: MultipleDependencySet;
+};
+
+export type DependencySet = SingularDependency | MultipleDependencySet | MultiplePathsDependencySet;
 
 // building objects of the correct class based on the type of each element
-
 interface ElementClassMapping {
   [key: string]: { new (...args: any[]): Charm };
 }
@@ -132,6 +193,7 @@ const classMapping: ElementClassMapping = {
   Character: Character,
   Charm: Charm,
   Grub: Grub,
+  Spell: Spell,
 };
 
 const buildMapElement = (data: MapElementData): MapElement => {
@@ -144,7 +206,10 @@ const buildMapElement = (data: MapElementData): MapElement => {
     data.location,
     data.pos,
     data.iconUrl,
+    data.iconScale,
   );
 };
+
+const mapElementsData = [...kings_pass, ...forgottenCrossroads];
 
 export const mapElements = mapElementsData.map(buildMapElement);

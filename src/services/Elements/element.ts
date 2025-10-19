@@ -18,6 +18,8 @@ export class MapElement extends Element {
   location: string;
   pos: number[];
   iconUrl: string;
+  customIconScale?: number;
+  defaultIconScale?: number;
 
   constructor(
     id: string,
@@ -27,64 +29,42 @@ export class MapElement extends Element {
     location: string,
     pos: number[],
     iconUrl: string,
+    iconScale?: number,
   ) {
     super(id, name, requires, type);
     this.location = location;
     this.pos = pos;
     this.iconUrl = iconUrl;
+    this.customIconScale = iconScale;
   }
 
   get iconScale(): number {
-    throw new Error("Getter 'iconScale' must be implemented by subclass");
+    if (this.customIconScale !== undefined) {
+      return this.customIconScale;
+    }
+    if (this.defaultIconScale === undefined) {
+      throw new Error('Icon scale not implemented for this element');
+    }
+    return this.defaultIconScale;
   }
 }
 
 export class Charm extends MapElement {
-  // constructor(
-  //   id: string,
-  //   name: string,
-  //   requires: DependencyManagerData,
-  //   type: string,
-  //   location: string,
-  //   pos: number[],
-  //   iconUrl: string,
-  // ) {
-  //   super(id, name, requires, type, location, pos, iconUrl);
-  //   this.location = location;
-  //   this.pos = pos;
-  // }
-
-  get iconScale(): number {
-    return 0.25;
-  }
+  defaultIconScale = 0.22;
 }
 
 export class Character extends MapElement {
-  get iconScale(): number {
-    return 0.25;
-  }
+  defaultIconScale = 0.25;
 }
 
 export class Boss extends MapElement {
-  get iconScale(): number {
-    return 0.25;
-  }
+  defaultIconScale = 0.25;
 }
 
 export class Grub extends MapElement {
-  get iconScale(): number {
-    return 0.5;
-  }
+  defaultIconScale = 0.5;
 }
 
-// export class MapElement extends Element {
-//   location: string;
-//   pos: number[] | null;
-
-//   constructor(mapElementData MapElementData) {
-//     const elementData = {}
-//   }
-// }
-
-// this.location = elementData.location;
-// this.pos = elementData.pos ?? null;
+export class Spell extends MapElement {
+  defaultIconScale = 0.25;
+}

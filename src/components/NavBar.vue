@@ -9,7 +9,7 @@ const navItems = [
 </script>
 
 <template>
-  <v-app-bar app color="primary" dark>
+  <v-app-bar app color="primary" dark elevation="0">
     <v-container>
       <v-row align="center" no-gutters>
         <v-spacer></v-spacer>

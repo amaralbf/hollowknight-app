@@ -44,7 +44,7 @@ export class ClickHandler {
   rootContainerClick(event: PIXI.FederatedPointerEvent) {
     this.emitElementClick({ x: event.globalX, y: event.globalY });
     console.log(
-      `Clicked on map (${event.getLocalPosition(this.mapContainer).x}, ${event.getLocalPosition(this.mapContainer).y})`,
+      `Clicked on map (${Math.floor(event.getLocalPosition(this.mapContainer).x)}, ${Math.floor(event.getLocalPosition(this.mapContainer).y)})`,
     );
     this.startDragging(event);
   }

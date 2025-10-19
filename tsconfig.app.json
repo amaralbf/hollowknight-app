@@ -9,12 +9,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@images/*": ["./src/assets/images/*"],
       "@services/*": ["./src/services/*"],
       "@map/*": ["./src/services/HKMap/*"],
       "@elements/*": ["./src/services/Elements/*"],
       // assets
       "@assets/*": ["./src/assets/*"],
+      "@images/*": ["./src/assets/images/*"],
       "@charms/*": ["./src/assets/charms/*"],
       "@pins/*": ["./src/assets/pins/*"]
     },

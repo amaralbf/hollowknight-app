@@ -7,6 +7,7 @@ ASSETS_PATH = Path(__file__).parents[1] / "src/assets"
 
 
 FILE_TRANSFORMATIONS = {
+    "bretta_infected.png": (4, -2, 1.2),
     "bretta.png": (7, 0, 1),
     "broken_vessel.png": (-15, 7, 1),
     "brooding_mawlek.png": (-4, 8, 0.7),
@@ -62,10 +63,9 @@ FILE_TRANSFORMATIONS = {
     "oblobble.png": (12, -20, 0.5),
     "pale_lurker.png": (-10, 10, 0.8),
     "relic_seeker_lemm.png": (-12, 0, 0.5),
-    "rescue_bretta.png": (0, 0, 1),
-    "rescue_sly.png": (5, 0, 1),
     "royal_waterways_pump.png": (-2, -24, 0.5),
     "salubra.png": (12, 5, 0.45),
+    "sly_infected.png": (7, -25, 2),
     "slys_shop.png": (-9, 7, 0.7),
     "soul_master.png": (5, 7, 0.75),
     "soul_tyrant.png": (6, 0, 1),
