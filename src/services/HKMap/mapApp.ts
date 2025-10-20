@@ -23,10 +23,17 @@ class MapApp {
     this.zoom(this.minZoomLevel);
   }
 
-  static async build() {
+  static async build(width: number | undefined) {
     const app = new PIXI.Application();
+
+    // set width to 1416 if width is undefined
+    if (!width) {
+      width = 0;
+    }
+
+    console.log(`Building pixijs app with width ${width}px`);
     await app.init({
-      width: 1480,
+      width: width,
       height: 800,
       background: '#222',
     });

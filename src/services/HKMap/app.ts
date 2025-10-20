@@ -3,8 +3,8 @@ import MapApp from '@map/mapApp';
 import { ClickHandler } from '@map/events';
 import { mapElements } from '@elements/data';
 
-const initCanvas = async (emitElementClick: CallableFunction) => {
-  const app = await MapApp.build();
+const initCanvas = async (emitElementClick: CallableFunction, width: number | undefined) => {
+  const app = await MapApp.build(width);
   document.getElementById('canvas-div')?.appendChild(app.canvas);
 
   const clickHandler = new ClickHandler(app, emitElementClick);

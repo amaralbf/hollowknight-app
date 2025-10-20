@@ -3,9 +3,7 @@ import { ref } from 'vue';
 
 const drawer = ref(false);
 
-const navItems = [
-  { title: 'Interactive Map', link: '/', name: 'map' },
-];
+const navItems = [{ title: 'Interactive Map', link: '/', name: 'map' }];
 </script>
 
 <template>
@@ -43,10 +41,6 @@ const navItems = [
 </template>
 
 <style scoped>
-.v-application {
-  background-color: #121212;
-}
-
 .v-btn--text {
   color: white !important;
 }
