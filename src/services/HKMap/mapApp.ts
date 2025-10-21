@@ -1,8 +1,6 @@
 import * as PIXI from 'pixi.js';
-import cytoscape from 'cytoscape';
 import type { MapElement } from '../Elements/element';
-
-const iconScale = 0.5;
+import _ from 'lodash';
 
 class MapApp {
   app: PIXI.Application<PIXI.Renderer>;
@@ -71,20 +69,26 @@ class MapApp {
 
   async draw(elements: MapElement[]) {
     for (const elem of elements) {
-      console.log(elem.id, elem.iconUrl);
-      // console.log(elem.icon);
-
       const texture = await PIXI.Assets.load(elem.iconUrl);
-      const sprite = new PIXI.Sprite(texture);
+      const mapElement = new PIXI.Sprite(texture);
 
-      sprite.anchor.set(0.5);
-      [sprite.x, sprite.y] = elem.pos;
-      sprite.scale.set(elem.iconScale);
+      mapElement.anchor.set(0.5);
+      [mapElement.x, mapElement.y] = elem.pos;
+      mapElement.scale.set(elem.iconScale);
 
-      this.mapContainer.addChild(sprite);
+      mapElement.eventMode = 'static';
+      mapElement.cursor = 'pointer';
+
+      mapElement.on('pointerover', _.partialRight(mouseOverElement, elem));
+
+      this.mapContainer.addChild(mapElement);
     }
   }
 }
+
+const mouseOverElement = (event: PIXI.FederatedPointerEvent, elem: MapElement) => {
+  console.log(elem);
+};
 
 const createRootContainer = (width: number, height: number) => {
   const container = new PIXI.Container();

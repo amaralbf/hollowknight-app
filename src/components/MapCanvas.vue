@@ -24,6 +24,6 @@ onMounted(() => {
 
 <style scoped>
 .map-div {
-  width: 78%;
+  width: 75%;
 }
 </style>
