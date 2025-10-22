@@ -2,17 +2,22 @@
 import { onMounted, ref } from 'vue';
 
 import initCanvas from '@/services/HKMap/app';
+import type { MapElement } from '@/services/Elements/element';
 
-const emit = defineEmits(['element-click']);
+const emit = defineEmits(['element-click', 'hover-element']);
 const emitElementClick = (element: any) => {
   emit('element-click', element);
+};
+
+const emitHoverElement = (element: MapElement) => {
+  emit('hover-element', element);
 };
 
 const canvasDiv = ref<HTMLElement | null>(null);
 
 onMounted(() => {
   const width = canvasDiv.value?.clientWidth;
-  initCanvas(emitElementClick, width);
+  initCanvas(emitElementClick, emitHoverElement, width);
 });
 </script>
 

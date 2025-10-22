@@ -17,6 +17,7 @@ class Element {
 export class MapElement extends Element {
   location: string;
   pos: number[];
+  imgUrl: string;
   iconUrl: string;
   customIconScale?: number;
   defaultIconScale?: number;
@@ -28,12 +29,14 @@ export class MapElement extends Element {
     type: string,
     location: string,
     pos: number[],
+    imgUrl: string,
     iconUrl: string,
     iconScale?: number,
   ) {
     super(id, name, requires, type);
     this.location = location;
     this.pos = pos;
+    this.imgUrl = imgUrl;
     this.iconUrl = iconUrl;
     this.customIconScale = iconScale;
   }

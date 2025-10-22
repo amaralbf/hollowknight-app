@@ -2,6 +2,8 @@ import * as PIXI from 'pixi.js';
 import type { MapElement } from '../Elements/element';
 import _ from 'lodash';
 
+let highlightCircle: PIXI.Graphics | null = null;
+
 class MapApp {
   app: PIXI.Application<PIXI.Renderer>;
   rootContainer: PIXI.Container;
@@ -9,7 +11,14 @@ class MapApp {
 
   minZoomLevel: number;
 
-  constructor(app: PIXI.Application, rootContainer: PIXI.Container, mapContainer: PIXI.Container) {
+  emitHoverElement: CallableFunction;
+
+  constructor(
+    app: PIXI.Application,
+    rootContainer: PIXI.Container,
+    mapContainer: PIXI.Container,
+    emitHoverElement: CallableFunction,
+  ) {
     this.app = app;
     this.rootContainer = rootContainer;
     this.mapContainer = mapContainer;
@@ -19,9 +28,11 @@ class MapApp {
 
     this.minZoomLevel = this.calculateMinZoomLevel();
     this.zoom(this.minZoomLevel);
+
+    this.emitHoverElement = emitHoverElement;
   }
 
-  static async build(width: number | undefined) {
+  static async build(emitHoverElement: CallableFunction, width: number | undefined) {
     const app = new PIXI.Application();
 
     // set width to 1416 if width is undefined
@@ -39,7 +50,7 @@ class MapApp {
     const rootContainer = createRootContainer(app.renderer.width, app.renderer.height);
     const mapContainer = await createMapContainer();
 
-    return new MapApp(app, rootContainer, mapContainer);
+    return new MapApp(app, rootContainer, mapContainer, emitHoverElement);
   }
 
   get canvas() {
@@ -68,27 +79,72 @@ class MapApp {
   }
 
   async draw(elements: MapElement[]) {
-    for (const elem of elements) {
-      const texture = await PIXI.Assets.load(elem.iconUrl);
-      const mapElement = new PIXI.Sprite(texture);
+    const behindElementLayer = new PIXI.RenderLayer();
 
-      mapElement.anchor.set(0.5);
-      [mapElement.x, mapElement.y] = elem.pos;
-      mapElement.scale.set(elem.iconScale);
+    const elementLayer = new PIXI.RenderLayer();
 
-      mapElement.eventMode = 'static';
-      mapElement.cursor = 'pointer';
+    this.mapContainer.addChild(behindElementLayer);
+    this.mapContainer.addChild(elementLayer);
 
-      mapElement.on('pointerover', _.partialRight(mouseOverElement, elem));
+    for (const mapElement of elements) {
+      console.log(mapElement.id);
+      const texture = await PIXI.Assets.load(mapElement.iconUrl);
+      const elementSprite = new PIXI.Sprite(texture);
 
-      this.mapContainer.addChild(mapElement);
+      elementSprite.anchor.set(0.5);
+      [elementSprite.x, elementSprite.y] = mapElement.pos;
+      elementSprite.scale.set(mapElement.iconScale);
+
+      elementSprite.eventMode = 'static';
+      elementSprite.cursor = 'pointer';
+
+      elementSprite.on('pointerover', () => {
+        const [x, y] = mapElement.pos;
+        const { width, height } = elementSprite.getSize();
+
+        if (highlightCircle === null) {
+          const radialGradient = new PIXI.FillGradient({
+            type: 'radial',
+            center: { x: 0.5, y: 0.5 },
+            innerRadius: 0,
+            outerCenter: { x: 0.5, y: 0.5 },
+            outerRadius: 0.5,
+            colorStops: [
+              { offset: 0.5, color: '#ffff' },
+              { offset: 1, color: '#0000' },
+            ],
+            textureSpace: 'local',
+          });
+
+          // It seems we need to pass (0, 0) as the starting point so that the ellipse’s origin aligns with the parent’s origin.
+          console.log(width, height);
+          highlightCircle = new PIXI.Graphics()
+            .ellipse(0, 0, width * 0.7, height * 0.7)
+            .fill(radialGradient);
+
+          // And then subsequent (x, y) updates are relative to (0, 0)
+          highlightCircle.x = x;
+          highlightCircle.y = y;
+          console.log(highlightCircle.getSize());
+
+          highlightCircle.eventMode = 'none';
+          behindElementLayer.attach(highlightCircle);
+          this.mapContainer.addChild(highlightCircle);
+        } else {
+          highlightCircle.x = x;
+          highlightCircle.y = y;
+          highlightCircle.setSize(width * 1.4, height * 1.4);
+          console.log(highlightCircle.getSize());
+        }
+
+        this.emitHoverElement(mapElement);
+      });
+
+      elementLayer.attach(elementSprite);
+      this.mapContainer.addChild(elementSprite);
     }
   }
 }
-
-const mouseOverElement = (event: PIXI.FederatedPointerEvent, elem: MapElement) => {
-  console.log(elem);
-};
 
 const createRootContainer = (width: number, height: number) => {
   const container = new PIXI.Container();

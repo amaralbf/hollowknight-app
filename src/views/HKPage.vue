@@ -4,8 +4,9 @@ import InfoPanel from '@/components/InfoPanel.vue';
 import NavBar from '@/components/NavBar.vue';
 
 import { ref, type Ref } from 'vue';
+import type { MapElement } from '@/services/Elements/element';
 
-const hoveredElement: Ref<string | null> = ref(null);
+const hoveredElement: Ref<MapElement | null> = ref(null);
 
 function handleHover(elem: any) {
   hoveredElement.value = elem;
@@ -15,8 +16,8 @@ function handleHover(elem: any) {
 <template>
   <NavBar />
   <div class="main-div">
-    <MapCanvas />
-    <InfoPanel />
+    <MapCanvas @hover-element="handleHover" />
+    <InfoPanel :element="hoveredElement" />
   </div>
 </template>
 
