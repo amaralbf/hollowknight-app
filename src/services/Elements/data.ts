@@ -8,7 +8,7 @@ const kings_pass: MapElementData[] = [
     type: 'Charm',
     location: "King's Pass",
     imgUrl: new URL('@charms/fury_of_the_fallen.png', import.meta.url).href,
-    iconUrl: new URL('@charms/fury_of_the_fallen.png', import.meta.url).href,
+    pinUrl: new URL('@charms/fury_of_the_fallen.png', import.meta.url).href,
     pos: [1731, 656],
   },
   {
@@ -18,7 +18,7 @@ const kings_pass: MapElementData[] = [
     type: 'Charm',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@charms/soul_catcher.png', import.meta.url).href,
-    iconUrl: new URL('@charms/soul_catcher.png', import.meta.url).href,
+    pinUrl: new URL('@charms/soul_catcher.png', import.meta.url).href,
     pos: [2038, 822],
   },
 ];
@@ -31,7 +31,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Character',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/cornifer.png', import.meta.url).href,
-    iconUrl: new URL('@pins/cornifer.png', import.meta.url).href,
+    pinUrl: new URL('@pins/cornifer.png', import.meta.url).href,
     pos: [1995, 865],
   },
   {
@@ -41,7 +41,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Character',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/grubfather.png', import.meta.url).href,
-    iconUrl: new URL('@pins/grubfather.png', import.meta.url).href,
+    pinUrl: new URL('@pins/grubfather.png', import.meta.url).href,
     pos: [1894, 712],
   },
   {
@@ -53,7 +53,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Boss',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/brooding_mawlek.png', import.meta.url).href,
-    iconUrl: new URL('@pins/brooding_mawlek.png', import.meta.url).href,
+    pinUrl: new URL('@pins/brooding_mawlek.png', import.meta.url).href,
     pos: [1927, 872],
   },
   {
@@ -63,7 +63,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Grub',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/grub.png', import.meta.url).href,
-    iconUrl: new URL('@pins/grub.png', import.meta.url).href,
+    pinUrl: new URL('@pins/grub.png', import.meta.url).href,
     pos: [2565, 701],
   },
   {
@@ -73,7 +73,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Grub',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/grub.png', import.meta.url).href,
-    iconUrl: new URL('@pins/grub.png', import.meta.url).href,
+    pinUrl: new URL('@pins/grub.png', import.meta.url).href,
     pos: [1733, 926],
   },
   {
@@ -83,7 +83,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Grub',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/grub.png', import.meta.url).href,
-    iconUrl: new URL('@pins/grub.png', import.meta.url).href,
+    pinUrl: new URL('@pins/grub.png', import.meta.url).href,
     pos: [2395, 850],
   },
   {
@@ -93,7 +93,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Grub',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/grub.png', import.meta.url).href,
-    iconUrl: new URL('@pins/grub.png', import.meta.url).href,
+    pinUrl: new URL('@pins/grub.png', import.meta.url).href,
     pos: [2453, 902],
   },
   {
@@ -106,7 +106,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Grub',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/grub.png', import.meta.url).href,
-    iconUrl: new URL('@pins/grub.png', import.meta.url).href,
+    pinUrl: new URL('@pins/grub.png', import.meta.url).href,
     pos: [2115, 756],
   },
   {
@@ -116,7 +116,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Boss',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/false_knight.png', import.meta.url).href,
-    iconUrl: new URL('@pins/false_knight.png', import.meta.url).href,
+    pinUrl: new URL('@pins/false_knight.png', import.meta.url).href,
     pos: [2141, 850],
   },
   {
@@ -126,7 +126,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Boss',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/gruz_mother.png', import.meta.url).href,
-    iconUrl: new URL('@pins/gruz_mother.png', import.meta.url).href,
+    pinUrl: new URL('@pins/gruz_mother.png', import.meta.url).href,
     pos: [2603, 987],
   },
   {
@@ -136,8 +136,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Spell',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/vengeful_spirit.png', import.meta.url).href,
-    iconUrl: new URL('@images/vengeful_spirit.png', import.meta.url).href,
-    iconScale: 0.35,
+    pinUrl: new URL('@pins/vengeful_spirit.png', import.meta.url).href,
     pos: [2070, 822],
   },
   // {
@@ -146,7 +145,7 @@ const forgottenCrossroads: MapElementData[] = [
   //   requires: [],
   //   type: 'Character',
   //   location: 'Forgotten Crossroads',
-  //   iconUrl: new URL('@pins/salubra.png', import.meta.url).href,
+  //   pinUrl: new URL('@pins/salubra.png', import.meta.url).href,
   //   pos: [2674, 1011],
   // },
   {
@@ -159,7 +158,7 @@ const forgottenCrossroads: MapElementData[] = [
     type: 'Character',
     location: 'Forgotten Crossroads',
     imgUrl: new URL('@images/sly_infected.png', import.meta.url).href,
-    iconUrl: new URL('@pins/sly_infected.png', import.meta.url).href,
+    pinUrl: new URL('@pins/sly_infected.png', import.meta.url).href,
     pos: [2607, 1028],
   },
 ];
@@ -171,9 +170,9 @@ export type MapElementData = {
   name: string;
   requires: DependencySet;
   type: string;
-  iconUrl: string;
+  pinUrl: string;
   imgUrl: string;
-  iconScale?: number;
+  pinScale?: number;
   location: string;
   pos: number[];
 };
@@ -221,8 +220,8 @@ const buildMapElement = (data: MapElementData): MapElement => {
     data.location,
     data.pos,
     data.imgUrl,
-    data.iconUrl,
-    data.iconScale,
+    data.pinUrl,
+    data.pinScale,
   );
 };
 

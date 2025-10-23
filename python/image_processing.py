@@ -77,6 +77,7 @@ FILE_TRANSFORMATIONS = {
     "tuk.png": (-18, -35, 0.4),
     "uumuu.png": (2, 11, 0.3),
     "vengefly_king.png": (27, -38, 0.7),
+    "vengeful_spirit.png": (3, 8, 1),
     "watcher_knights.png": (5, -8, 0.6),
     "whispering_root.png": (7, 0, 0.65),
     "white_defender.png": (0, -20, 1),

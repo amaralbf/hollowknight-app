@@ -4,6 +4,8 @@ import _ from 'lodash';
 
 let highlightCircle: PIXI.Graphics | null = null;
 
+let currentHighlightElement: PIXI.Sprite | null = null;
+
 class MapApp {
   app: PIXI.Application<PIXI.Renderer>;
   rootContainer: PIXI.Container;
@@ -88,12 +90,13 @@ class MapApp {
 
     for (const mapElement of elements) {
       console.log(mapElement.id);
-      const texture = await PIXI.Assets.load(mapElement.iconUrl);
+      const texture = await PIXI.Assets.load(mapElement.pinUrl);
       const elementSprite = new PIXI.Sprite(texture);
 
       elementSprite.anchor.set(0.5);
       [elementSprite.x, elementSprite.y] = mapElement.pos;
-      elementSprite.scale.set(mapElement.iconScale);
+      elementSprite.scale.set(mapElement.pinScale);
+      elementSprite.alpha = 0.7;
 
       elementSprite.eventMode = 'static';
       elementSprite.cursor = 'pointer';
@@ -102,6 +105,7 @@ class MapApp {
         const [x, y] = mapElement.pos;
         const { width, height } = elementSprite.getSize();
 
+        const highlightCircleSizeFactor = mapElement.inGamePin ? 0.58 : 0.7;
         if (highlightCircle === null) {
           const radialGradient = new PIXI.FillGradient({
             type: 'radial',
@@ -119,7 +123,7 @@ class MapApp {
           // It seems we need to pass (0, 0) as the starting point so that the ellipse’s origin aligns with the parent’s origin.
           console.log(width, height);
           highlightCircle = new PIXI.Graphics()
-            .ellipse(0, 0, width * 0.7, height * 0.7)
+            .ellipse(0, 0, width * highlightCircleSizeFactor, height * highlightCircleSizeFactor)
             .fill(radialGradient);
 
           // And then subsequent (x, y) updates are relative to (0, 0)
@@ -133,9 +137,18 @@ class MapApp {
         } else {
           highlightCircle.x = x;
           highlightCircle.y = y;
-          highlightCircle.setSize(width * 1.4, height * 1.4);
+          highlightCircle.setSize(
+            width * 2 * highlightCircleSizeFactor,
+            height * 2 * highlightCircleSizeFactor,
+          );
           console.log(highlightCircle.getSize());
         }
+
+        if (currentHighlightElement) {
+          currentHighlightElement.alpha = 0.7;
+        }
+        elementSprite.alpha = 1.0;
+        currentHighlightElement = elementSprite;
 
         this.emitHoverElement(mapElement);
       });

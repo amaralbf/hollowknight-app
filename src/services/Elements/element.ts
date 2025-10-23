@@ -18,9 +18,10 @@ export class MapElement extends Element {
   location: string;
   pos: number[];
   imgUrl: string;
-  iconUrl: string;
-  customIconScale?: number;
+  pinUrl: string;
+  customPinScale?: number;
   defaultIconScale?: number;
+  inGamePin: boolean;
 
   constructor(
     id: string,
@@ -30,20 +31,21 @@ export class MapElement extends Element {
     location: string,
     pos: number[],
     imgUrl: string,
-    iconUrl: string,
-    iconScale?: number,
+    pinUrl: string,
+    pinScale?: number,
   ) {
     super(id, name, requires, type);
     this.location = location;
     this.pos = pos;
     this.imgUrl = imgUrl;
-    this.iconUrl = iconUrl;
-    this.customIconScale = iconScale;
+    this.pinUrl = pinUrl;
+    this.customPinScale = pinScale;
+    this.inGamePin = false;
   }
 
-  get iconScale(): number {
-    if (this.customIconScale !== undefined) {
-      return this.customIconScale;
+  get pinScale(): number {
+    if (this.customPinScale !== undefined) {
+      return this.customPinScale;
     }
     if (this.defaultIconScale === undefined) {
       throw new Error('Icon scale not implemented for this element');
@@ -66,6 +68,7 @@ export class Boss extends MapElement {
 
 export class Grub extends MapElement {
   defaultIconScale = 0.5;
+  inGamePin = true;
 }
 
 export class Spell extends MapElement {
